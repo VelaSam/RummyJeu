@@ -1,5 +1,8 @@
 package com.moumene.rummy;
 
+//C'est un test
+
+
 import java.util.Scanner;
 
 import com.moumene.util.Util;
