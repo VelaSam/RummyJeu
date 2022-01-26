@@ -243,6 +243,9 @@ public class Rummy {
 	 */
 	//Place les 106 pieces dans la pioche (incluant les 2 jokers) :
 	public static void initialiserPioche(Pioche pioche) {
+		
+		
+		
 
 	}
 	
