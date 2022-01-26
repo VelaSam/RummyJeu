@@ -1,6 +1,10 @@
 package com.moumene.rummy;
 
 //C'est un test
+//kjabdijqbw diubqwd uibwdo ubwedwedwed wedewdwqdqwndqwd 
+
+//dfsdfsdfdsfsdf
+
 
 
 import java.util.Scanner;
