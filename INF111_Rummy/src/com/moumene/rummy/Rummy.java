@@ -1,5 +1,6 @@
 package com.moumene.rummy;
 
+import java.util.Random;
 import java.util.Scanner;
 
 import com.moumene.util.Util;
@@ -38,6 +39,8 @@ public class Rummy {
 		joueur2.nom = clavier.next();
 		
 		initialiserPioche(pioche);
+
+		
 		melangerPioche(pioche);
 		distribuerMain(pioche,joueur1,Constantes.TAILLE_MANNE_DEPART);
 		distribuerMain(pioche,joueur2,Constantes.TAILLE_MANNE_DEPART);
@@ -208,9 +211,19 @@ public class Rummy {
 	 * @param joueur le joueur
 	 * @param nombrePieces le nombre de pièces à extraire de la pioche
 	 */
-	public static void distribuerMain(Pioche pioche, Joueur joueur, 
-										int nombrePieces) {
+	public static void distribuerMain(Pioche pioche, Joueur joueur,	int nombrePieces) {
 
+		int i;
+		
+		for(i = 0; i < nombrePieces && pioche.nombrePieces!=0 ; i++ ) {
+			
+			joueur.manne[joueur.nombrePieces] = pioche.pieces[105-(106-pioche.nombrePieces)];
+			pioche.pieces[105-(106-pioche.nombrePieces)] = new Piece();
+			pioche.nombrePieces--;
+			joueur.nombrePieces++;
+		}
+		
+		return;
 	}
 	
 	/**
@@ -303,6 +316,8 @@ public class Rummy {
 	 */
 	public static void vider(Pioche pioche) {
 
+		
+		
 	}
 	
 	/**
@@ -322,6 +337,29 @@ public class Rummy {
 	 */
 	public static void melangerPioche(Pioche pioche) {
 
+		Random aleatoire = new Random();
+		Piece temp;
+		
+		int i, j, z;
+		
+		
+		for(i = 0; i < Constantes.TRES_GRAND; i++) {
+			
+			//Generer deux nombres aleatoires 
+			do {
+				
+			j=aleatoire.nextInt(pioche.nombrePieces);
+			z=aleatoire.nextInt(pioche.nombrePieces);
+			
+			}while(j==z);
+			
+			//SWAP :D
+			temp = pioche.pieces[j];
+			pioche.pieces[j]=pioche.pieces[z];
+			pioche.pieces[z]=temp;
+		}
+		
+		return;
 	}
 
 

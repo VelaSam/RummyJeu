@@ -1,7 +1,10 @@
 package com.moumene.rummy;
 
 public class Constantes {
-
+	//Constantes Samuel et Jonathan
+	public static final int VIDE = -1;
+	public static final int TRES_GRAND = 10000;
+	
 	//Maximum de 40 combinaisons sur la table :
 	public static final int MAX_COMBINAISONS = 40; 
 	
@@ -14,6 +17,7 @@ public class Constantes {
 	//Une main ne peut dépasser 106 pièces :
 	public static final int LONGUEUR_MAX_MAIN = 106;
 	
+
 	public static final int UN = 1;
 	public static final int DEUX = 2;
 	public static final int TROIS = 3;
