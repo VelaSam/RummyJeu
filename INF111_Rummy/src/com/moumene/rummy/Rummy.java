@@ -243,68 +243,58 @@ public class Rummy {
 	 */
 	//Place les 106 pieces dans la pioche (incluant les 2 jokers) :
 	public static void initialiserPioche(Pioche pioche) {
-<<<<<<< Updated upstream
-
-		int i, j,z;
-		
+		int i, j;
 		
 		vider(pioche);
-		
-		//*2
-		
-			for(j = 0; j < Constantes.COULEURS.length; j++)
+		//Première 52 pièces
+		for(j = 0; j < Constantes.COULEURS.length; j++)
+		{
+						
+			for(i=0+(Constantes.TREIZE*j); i < Constantes.TREIZE+(Constantes.TREIZE*j); i++)
 			{
-							
-				for(i=0+(Constantes.TREIZE*j); i < Constantes.TREIZE+(Constantes.TREIZE*j); i++)
-				{
+			
+				pioche.pieces[i] = new Piece();
 				
-					pioche.pieces[i] = new Piece();
-					
-					
-					pioche.pieces[i].numero = i-(Constantes.TREIZE*j)+1; 
-					pioche.pieces[i].couleur = Constantes.COULEURS[j];
-					
-					
-					pioche.nombrePieces++;
-				}
+				
+				pioche.pieces[i].numero = i-(Constantes.TREIZE*j)+1; 
+				pioche.pieces[i].couleur = Constantes.COULEURS[j];
+				
+				
+				pioche.nombrePieces++;
 			}
-			
-			
-			
-			
-			for(j = 0; j < Constantes.COULEURS.length; j++)
+		}
+		//2e moitier du paquet jusqu'a 104
+		for(j = 0; j < Constantes.COULEURS.length; j++)
+		{
+						
+			for(i=(((Constantes.NOMBRE_TOTAL_PIECES-2)/2)+(Constantes.TREIZE*j)); i < (((Constantes.NOMBRE_TOTAL_PIECES-2)/2)+Constantes.TREIZE+(Constantes.TREIZE*j)); i++)
 			{
-							
-				for(i=(((Constantes.NOMBRE_TOTAL_PIECES-2)/2)+(Constantes.TREIZE*j)); i < (((Constantes.NOMBRE_TOTAL_PIECES-2)/2)+Constantes.TREIZE+(Constantes.TREIZE*j)); i++)
-				{
+			
+				pioche.pieces[i] = new Piece();
 				
-					pioche.pieces[i] = new Piece();
-					
-					pioche.pieces[i].numero = i-((Constantes.NOMBRE_TOTAL_PIECES-2)/2)-(Constantes.TREIZE*j)+1; 
-					pioche.pieces[i].couleur = Constantes.COULEURS[j];
-					
-					
-					pioche.nombrePieces++;
-				}
+				pioche.pieces[i].numero = i-((Constantes.NOMBRE_TOTAL_PIECES-2)/2)-(Constantes.TREIZE*j)+1; 
+				pioche.pieces[i].couleur = Constantes.COULEURS[j];
+				
+				
+				pioche.nombrePieces++;
 			}
-			
-				
-				pioche.pieces[Constantes.NOMBRE_TOTAL_PIECES-2] =  new Piece();
-				pioche.pieces[Constantes.NOMBRE_TOTAL_PIECES-2].numero = Constantes.VINGT_CINQ;
-				pioche.pieces[Constantes.NOMBRE_TOTAL_PIECES-2].couleur = Constantes.NOIR;
-				pioche.nombrePieces++;
-				
-				
-
-				pioche.pieces[Constantes.NOMBRE_TOTAL_PIECES-1] =  new Piece();
-				pioche.pieces[Constantes.NOMBRE_TOTAL_PIECES-1].numero = Constantes.VINGT_CINQ;
-				pioche.pieces[Constantes.NOMBRE_TOTAL_PIECES-1].couleur = Constantes.NOIR;
-				pioche.nombrePieces++;
-			
+		}
+		
+		//Initialiser joker1
+		pioche.pieces[Constantes.NOMBRE_TOTAL_PIECES-2] =  new Piece();
+		pioche.pieces[Constantes.NOMBRE_TOTAL_PIECES-2].numero = Constantes.VINGT_CINQ;
+		pioche.pieces[Constantes.NOMBRE_TOTAL_PIECES-2].couleur = Constantes.NOIR;
+		pioche.nombrePieces++;
+		
+		
+		//Initialiser joker2
+		pioche.pieces[Constantes.NOMBRE_TOTAL_PIECES-1] =  new Piece();
+		pioche.pieces[Constantes.NOMBRE_TOTAL_PIECES-1].numero = Constantes.VINGT_CINQ;
+		pioche.pieces[Constantes.NOMBRE_TOTAL_PIECES-1].couleur = Constantes.NOIR;
+		pioche.nombrePieces++;
+		
 		return;
-=======
-		
->>>>>>> Stashed changes
+
 	}
 	
 	/**
