@@ -33,10 +33,6 @@ public class Rummy {
 
 	public static void main(String[] args) {
 
-		vider(pioche);
-		System.out.println("jsdoiasjdoiasd");
-		
-		/*
 		System.out.print("Nom premier joueur : ");
 		joueur1.nom = clavier.next();
 		System.out.print("Nom deuxième joueur : ");
@@ -59,7 +55,7 @@ public class Rummy {
 		} else {
 			System.out.println("Partie terminée. Le gagnant est "+joueur2.nom);
 		}
-		*/
+		
 	}
 	
 /***** Méthodes de déroulement du jeu *****/
@@ -69,6 +65,9 @@ public class Rummy {
 	 */
 	public static void passerAuSuivant() {
 		
+		joueurActif = joueurActif==joueur1?joueur2:joueur1; 	
+		
+		return;
 	}
 	
 	/**
@@ -222,8 +221,8 @@ public class Rummy {
 		
 		for(i = 0; i < nombrePieces && pioche.nombrePieces!=0 ; i++ ) {
 			
-			joueur.manne[joueur.nombrePieces] = pioche.pieces[105-(106-pioche.nombrePieces)];
-			pioche.pieces[105-(106-pioche.nombrePieces)] = new Piece();
+			joueur.manne[joueur.nombrePieces] = pioche.pieces[(Constantes.LONGUEUR_MAX_COMBINAISON-1)-(Constantes.LONGUEUR_MAX_COMBINAISON-pioche.nombrePieces)];
+			pioche.pieces[(Constantes.LONGUEUR_MAX_COMBINAISON-1)-(Constantes.LONGUEUR_MAX_COMBINAISON-pioche.nombrePieces)] = new Piece();
 			pioche.nombrePieces--;
 			joueur.nombrePieces++;
 		}
@@ -310,7 +309,7 @@ public class Rummy {
 		pioche.pieces[Constantes.NOMBRE_TOTAL_PIECES-1].numero = Constantes.VINGT_CINQ;
 		pioche.pieces[Constantes.NOMBRE_TOTAL_PIECES-1].couleur = Constantes.NOIR;
 		pioche.nombrePieces++;
-		//allo:D XXXDDDD
+	
 		return; 
 
 	}
@@ -323,13 +322,12 @@ public class Rummy {
 
 		int i;
 		
-		for(i = 0; i < (Constantes.NOMBRE_TOTAL_PIECES-1); i++) {
+		for(i = 1; i < (Constantes.NOMBRE_TOTAL_PIECES); i++) {
+		pioche.pieces[i] = new Piece();
 		pioche.pieces[i].couleur = '\0';
 		pioche.pieces[i].numero = Constantes.VIDE;
 		}
-		
-		System.out.println("sdasdsadasdads");
-		
+		pioche.nombrePieces = 0;
 		return;
 		
 	}
