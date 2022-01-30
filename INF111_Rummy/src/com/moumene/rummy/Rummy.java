@@ -86,6 +86,11 @@ public class Rummy {
 	 * @return la valeur de la pièce
 	 */
 	public static int getValeur(Piece piece) {
+		
+		
+		
+		
+		
 		return piece.numero;
 	}
 	
@@ -166,8 +171,21 @@ public class Rummy {
 	 * @return true si le caractère est une couleur valide, false sinon.
 	 */
 	public static boolean estUneCouleurValide(char caractere) {
-
-		return false;
+		
+		boolean reponse=false;
+		
+		switch (caractere) {
+		
+		case Constantes.VERT:
+		case Constantes.ROUGE:
+		case Constantes.BLEU:
+		case Constantes.JAUNE:
+		case Constantes.NOIR:
+			reponse = true;
+			break;
+		}
+		
+		return reponse;
 	}	
 
 	/**
@@ -201,7 +219,14 @@ public class Rummy {
 	 */
 	public static boolean estUneCombinaison(Piece[] pieces) {
 
-		return false;
+		boolean reponse = false;
+		
+		
+		
+		
+		
+		
+		return reponse;
 	}
 
 
@@ -392,6 +417,26 @@ public class Rummy {
 	 */
 	public static void afficherMain(Joueur joueur) {
 
+		
+		
+		//FONCTION PAS ENCORE TESTEE
+		int i;
+		
+		//imprime nom du joueur
+		System.out.println(joueur.nom + ": ");
+		
+		//boucle qui va jusquau nombre de pieces du joueur
+		for(i = 0; i < joueur.nombrePieces; i++) {
+			
+			//imprime le numero de la piece
+			System.out.print(joueur.manne[i].numero);
+			//imprime la couleur de la piece
+			System.out.print(joueur.manne[i].couleur);
+			
+			//on devrait avoir comme exemple: 13J2V8B25N
+		}
+		
+		return;
 	}	
 	
 	/**
