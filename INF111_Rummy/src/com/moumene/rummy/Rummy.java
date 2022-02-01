@@ -44,7 +44,7 @@ public class Rummy {
 		melangerPioche(pioche);
 		distribuerMain(pioche,joueur1,Constantes.TAILLE_MANNE_DEPART);
 		distribuerMain(pioche,joueur2,Constantes.TAILLE_MANNE_DEPART);
-
+		
 		joueurActif = joueur1;
 		while (!mainVide(joueur1) && !mainVide(joueur2)) {
 			faireJouer(joueurActif);
@@ -90,7 +90,7 @@ public class Rummy {
 		
 		
 		
-		
+	
 		return piece.numero;
 	}
 	
@@ -112,8 +112,40 @@ public class Rummy {
 	 * @return tableau contenant les pièces décrites dans la saisie.
 	 */
 	public static Piece[] extrairePieces(String saisie) {
-
-		return null;
+		//Création
+		int i,j = -1;
+		char[] stringToChar;
+		String[] pieceNumero;
+		Piece[] piece;
+		
+		//Initialisation
+		pieceNumero = saisie.split("[J,V,B,R,N]");
+		stringToChar = saisie.toCharArray();
+			//pieceNumero.length est la référence car elle représente
+			//la grandeur exacte de pieces
+		piece = new Piece[pieceNumero.length];
+		
+		//On rentre les valeur des numéro des pieces 
+		//contenu dans pieceNumero grace a la commande "split"
+		for(i = 0; i<pieceNumero.length; i++)
+		{
+			piece[i] = new Piece();
+			piece[i].numero = Integer.parseInt(pieceNumero[i]);
+		}
+			
+		
+		//Le compteur j indiquera la case dans le tableau @piece correspondant au bon numero
+		for(i = 0; i< stringToChar.length;i++)
+		{
+			if(stringToChar[i]=='J'||stringToChar[i]=='V'||stringToChar[i]=='B'||
+					stringToChar[i]=='R'||stringToChar[i]=='N')
+			{
+				j++;
+				piece[j].couleur = stringToChar[i];
+			}		
+		}
+		
+		return piece;
 	}
 	
 	/**
@@ -161,8 +193,14 @@ public class Rummy {
 	 * @return true si la main du joueur est vide, false sinon.
 	 */
 	public static boolean mainVide(Joueur joueur) {
+		boolean reponse = true;
+		int i;
 		
-		return false;
+		for(i = 0; i< joueur.manne.length;i++)
+			if(joueur.manne[i] != null && joueur.manne[i].numero != Constantes.VIDE)
+				reponse = false;
+		
+		return reponse;
 	}
 	
 	/**
