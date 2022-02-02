@@ -1,5 +1,5 @@
 package com.moumene.rummy;
-//ceci est mon commentaire
+
 import java.util.Random;
 import java.util.Scanner;
 
