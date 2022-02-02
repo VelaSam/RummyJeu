@@ -210,7 +210,7 @@ public class Rummy {
 	 */
 	public static boolean estUneCouleurValide(char caractere) {
 		
-		boolean reponse=false;
+		boolean reponse;
 		
 		switch (caractere) {
 		
@@ -220,6 +220,9 @@ public class Rummy {
 		case Constantes.JAUNE:
 		case Constantes.NOIR:
 			reponse = true;
+			break;
+		default:
+			reponse = false;
 			break;
 		}
 		
