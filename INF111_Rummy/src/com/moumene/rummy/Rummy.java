@@ -113,7 +113,7 @@ public class Rummy {
 	 */
 	public static Piece[] extrairePieces(String saisie) {
 		//Création
-		int i,j = -1;
+		int i,j = Constantes.VIDE;
 		char[] stringToChar;
 		String[] pieceNumero;
 		Piece[] piece;
@@ -168,8 +168,7 @@ public class Rummy {
 	 * 							première combinaison porte le numéro 1.
 	 * @return true si toutes le pièces ont été ajoutées, false sinon.	
 	 */
-	public static boolean ajouterPiecesALaCombinaison(Piece[] pieces,
-														int numeroCombinaison) {
+	public static boolean ajouterPiecesALaCombinaison(Piece[] pieces,int numeroCombinaison) {
 
 		return false;
 	}
