@@ -76,7 +76,68 @@ public class Rummy {
 	 */
 	public static void faireJouer(Joueur joueur) {
 
+		//TOUT CE QUI EST LA DEDANS NEST PAS SUR DETRE BON XD
+		String pieceChoisie;
+	
+		//Afficher la table de jeu;
+		afficherTable();
+		
+		//Afficher la main du joueur;
+		afficherMain(joueur);
+		
+		//Demander au joueur de choisir la liste des pièces de sa main qu’il veut placer;
+		System.out.println("Quelles pieces voulez vous placer?: ");
+		
+		pieceChoisie = clavier.next();
+		
+		//Tant que la liste choisie n’est pas vide Faire
+		
+		
+		//Si la liste constitue une combinaison Alors
+		
+		
+		//Demander au joueur s’il veut constituer une nouvelle combinaison, sinon
+		
+		
+		//à quelle combinaison sur la table il veut l’ajouter
+		
+		
+		//Sinon
+		
+		
+		//Demander au joueur à quelle combinaison sur la table il veut l’ajouter
+		
+		
+		//Fin Si
+		
+		
+		//Réafficher la table de jeu;
+		afficherTable();
+		
+		//Réafficher la main du joueur;
+		afficherMain(joueur);
+		
+		//Demander au joueur de choisir une autre liste de pièces de sa main à placer;
+		
+		
+		//Fin Tant que
+		
+		
+		//Si le joueur n’a placé aucune liste Alors
+		
+		
+		//Demander au joueur de choisir une de ses pièces qui sera échangée avec une
+		
+		
+		//pièce de la pioche;
+		
+		
+		//Fin Si
+
+		
+		
 	}
+	
 	
 /***** Méthodes de manipulation de pièces *****/	
 	
@@ -86,10 +147,6 @@ public class Rummy {
 	 * @return la valeur de la pièce
 	 */
 	public static int getValeur(Piece piece) {
-		
-		
-		
-		
 	
 		return piece.numero;
 	}
@@ -249,6 +306,9 @@ public class Rummy {
 	 */
 	public static boolean valide(Joueur joueur, Piece[] pieces) {
 
+		
+		//recoit pieces et regarde dans main du joueur si il a ces pieces
+		
 		return false;
 	}
 	
@@ -316,6 +376,18 @@ public class Rummy {
 	 */
 	public static Piece echanger(Pioche pioche, Piece piece) {
 
+		Random aleatoire = new Random();
+		int nombreAleatoire;
+		
+		//inclus 0, exclus la limite pioche.nombrePieces
+		nombreChoisi = aleatoire.nextInt(pioche.nombrePieces);
+		
+		pioche.pieces[nombreAleatoire];
+		
+		
+		
+		
+		
 		return null;
 	}
 	
@@ -449,6 +521,15 @@ public class Rummy {
 	 */
 	public static void afficherPieces(Piece[] pieces, int nombre) {
 
+		int i;
+		
+		for(i = 0; i < nombre && i < pieces.length; i++) {
+			
+			System.out.print(pieces[i].numero + pieces[i].couleur + " ");
+		}
+		
+		System.out.println("");
+		return;
 	}	
 	
 	/**
@@ -471,11 +552,11 @@ public class Rummy {
 			//imprime le numero de la piece
 			System.out.print(joueur.manne[i].numero);
 			//imprime la couleur de la piece
-			System.out.print(joueur.manne[i].couleur);
+			System.out.print(joueur.manne[i].couleur+" ");
 			
-			//on devrait avoir comme exemple: 13J2V8B25N
+			//on devrait avoir comme exemple: 13J 2V 8B 25N
 		}
-		
+		System.out.println("");
 		return;
 	}	
 	
