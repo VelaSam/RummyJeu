@@ -293,8 +293,25 @@ public class Rummy {
 	 * 			pièces, false sinon.
 	 */
 	public static boolean saisieCorrecte(String chaine) {
+		
+		boolean rep = false;
+		Piece[] aVerifier;
+		int i;
+		
+		//Il faut vérifier si pas de lettre consécutif && qu'on reste dans couleurs dispo
+		for (i=0 ; i<chaine.length()-1;i++)
+		{
+			//if(chaine.charAt(i)='')
+		}
+		
+		// On utilise la fct extrairePieces dans le but de séparer les possibilité
+		// et trouver si les nombre son entre 1 a 13 ou 25
+		//On peut utiliser extrairePieces pour trouver les nombre ou s'en inspirer
+		aVerifier = extrairePieces(chaine);
+		
+		for(i=0; i<aVerifier.length; i++)
 
-		return false;
+		return rep;
 	}
 	
 	/**
@@ -339,7 +356,7 @@ public class Rummy {
 		switch(nbreJoker)
 		{
 		case 0:
-			if()
+			//if()
 		case 1:
 			
 		default:
