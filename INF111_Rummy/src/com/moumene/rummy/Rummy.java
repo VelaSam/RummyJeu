@@ -319,9 +319,32 @@ public class Rummy {
 	 */
 	public static boolean estUneCombinaison(Piece[] pieces) {
 
-		boolean reponse = false;
+		boolean reponse = true;
+		int i;
+		int nbreJoker=0;
+		int tentative;//0 si série et 1 si suite
+		
+		if(pieces.length >= 3)
+			for(i=0; i<pieces.length;i++)
+			{
+				if(pieces[0].couleur == 'N')
+					nbreJoker++;
+			}
+		else
+			nbreJoker = -1;//Nombre insufisante de carte
+			
+			
 		
 		
+		switch(nbreJoker)
+		{
+		case 0:
+			if()
+		case 1:
+			
+		default:
+			reponse = false;
+		}
 		
 		
 		
@@ -362,8 +385,19 @@ public class Rummy {
 	 * @return la pièce extraite
 	 */
 	public static Piece piocher(Pioche pioche) {
-
-		return null;
+		Piece piger;
+		int i;
+		//On prend en compte que l'on pige au début du tableau. Il faut donc décaler le restant des pieces pour remplir le trou
+		piger = pioche.pieces[0];
+		
+		for(i=0; i<pioche.nombrePieces;i++)
+		{
+			pioche.pieces[i]= pioche.pieces[i+1];
+		}
+		
+		pioche.nombrePieces--;
+		
+		return piger;//Pas tester!!!!
 	}
 	
 	/**
@@ -375,20 +409,19 @@ public class Rummy {
 	 * @return La pièce retirée de la pioche.
 	 */
 	public static Piece echanger(Pioche pioche, Piece piece) {
-
+		
 		Random aleatoire = new Random();
 		int nombreAleatoire;
+		Piece temp;
 		
 		//inclus 0, exclus la limite pioche.nombrePieces
-		nombreChoisi = aleatoire.nextInt(pioche.nombrePieces);
+		nombreAleatoire = aleatoire.nextInt(pioche.nombrePieces);
 		
-		pioche.pieces[nombreAleatoire];
+		temp = pioche.pieces[nombreAleatoire];
+		pioche.pieces[nombreAleatoire] = piece;
+		piece = temp;
 		
-		
-		
-		
-		
-		return null;
+		return piece;//Pas tester !!!
 	}
 	
 	/**
