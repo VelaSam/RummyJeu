@@ -32,7 +32,8 @@ public class Rummy {
 						 joueurActif;
 
 	public static void main(String[] args) {
-
+		Piece test[] = extrairePieces(clavier.next());//Pour mon test
+		estUneCombinaison(test);//Pour mon test
 		System.out.print("Nom premier joueur : ");
 		joueur1.nom = clavier.next();
 		System.out.print("Nom deuxième joueur : ");
@@ -310,6 +311,9 @@ public class Rummy {
 		aVerifier = extrairePieces(chaine);
 		
 		for(i=0; i<aVerifier.length; i++)
+		{
+			
+		}
 
 		return rep;
 	}
@@ -336,32 +340,59 @@ public class Rummy {
 	 */
 	public static boolean estUneCombinaison(Piece[] pieces) {
 
-		boolean reponse = true;
-		int i;
-		int nbreJoker=0;
-		int tentative;//0 si série et 1 si suite
+		boolean reponse = true;// par défault on dira que c'est vrais
+		int i,j;
+		int validation=0;
+		int validationNumber=0;
 		
 		if(pieces.length >= 3)
-			for(i=0; i<pieces.length;i++)
-			{
-				if(pieces[0].couleur == 'N')
-					nbreJoker++;
-			}
-		else
-			nbreJoker = -1;//Nombre insufisante de carte
-			
-			
-		
-		
-		switch(nbreJoker)
 		{
-		case 0:
-			//if()
-		case 1:
+			if(pieces.length <= 4)
+			{
+				validation = 0;
+				//Cas de série sans joker
+				for(i = 0; i < pieces.length-1; i++)
+				{
+					for(j=i+1; j< pieces.length;j++)
+					{
+						if(pieces[i].numero == pieces[j].numero && pieces[i].couleur != pieces[j].couleur|| pieces[j].numero ==25)
+						{
+							validationNumber++;
+							validation++;
+						}
+						else if(pieces[i].numero != 25)
+							validationNumber++;
+					}	
+				}
+				// Pas exactement, mais on essayera de démontrer que c'est peut être une suite pour changer d'avis
+				if(validation != validationNumber)
+					reponse = false;
+					
+			}
 			
-		default:
-			reponse = false;
+	
+			if(reponse == false)// Si c'est vrais, on ne veux pas modifier la réponse
+			{
+				validationNumber = 0;
+				validation=0;//Remise a zéro de l'évalution
+				for(i=0; i< pieces.length-1 ; i++)
+				{
+					for(j=i+1; j<pieces.length; j++)
+						if(pieces[i].numero+1 == pieces[j].numero && pieces[i].couleur == pieces[j].couleur || pieces[j].numero == 25)
+						{
+							validation++;
+							validationNumber++;
+						}
+						else if(pieces[i].numero != 25)
+							validationNumber++;
+							
+				}
+				if(validation != validationNumber)
+					reponse = false;
+			}
 		}
+		else
+			reponse = false;
 		
 		
 		
