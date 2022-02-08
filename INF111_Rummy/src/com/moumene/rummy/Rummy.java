@@ -558,7 +558,29 @@ public class Rummy {
 	 */
 	public static boolean ajouterPiece(Pioche pioche, Piece piece) {
 
-		return false;
+		boolean ajoutReussi;
+		
+		//PAS SUR SI CEST LA BONNE CONSTANTE ICI
+		//PAS SUR SI CEST LA BONNE CONSTANTE ICI
+		//PAS SUR SI CEST LA BONNE CONSTANTE ICI
+		//PAS SUR SI CEST LA BONNE CONSTANTE ICI:
+		if(pioche.nombrePieces >= Constantes.NOMBRE_TOTAL_PIECES)
+			ajoutReussi = false;
+		
+		else {
+			
+			pioche.pieces[pioche.nombrePieces].couleur = piece.couleur;
+			pioche.pieces[pioche.nombrePieces].numero = piece.numero;
+			
+			piece.couleur = '\0';
+			piece.numero = Constantes.VIDE;
+			
+			pioche.nombrePieces++;
+			
+			ajoutReussi = true;
+		}
+		
+		return ajoutReussi;
 	}
 	
 	/**
