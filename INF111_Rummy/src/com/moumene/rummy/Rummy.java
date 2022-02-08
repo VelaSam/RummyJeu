@@ -215,7 +215,30 @@ public class Rummy {
 	 */
 	public static boolean ajouterPiece(Joueur joueur, Piece piece) {
 
-		return false;
+		
+		boolean ajoutReussi;
+			
+			//PAS SUR SI CEST LA BONNE CONSTANTE ICI
+			//PAS SUR SI CEST LA BONNE CONSTANTE ICI
+			//PAS SUR SI CEST LA BONNE CONSTANTE ICI
+			//PAS SUR SI CEST LA BONNE CONSTANTE ICI:
+			if(joueur.nombrePieces >= Constantes.LONGUEUR_MAX_MAIN)
+				ajoutReussi = false;
+			
+			else {
+				
+				joueur.manne[pioche.nombrePieces].couleur = piece.couleur;
+				joueur.manne[joueur.nombrePieces].numero = piece.numero;
+				
+				piece.couleur = '\0';
+				piece.numero = Constantes.VIDE;
+				
+				joueur.nombrePieces++;
+				
+				ajoutReussi = true;
+			}
+			
+		return ajoutReussi;
 	}	
 		
 	/**
