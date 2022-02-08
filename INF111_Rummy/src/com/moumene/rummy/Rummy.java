@@ -227,7 +227,7 @@ public class Rummy {
 			
 			else {
 				
-				joueur.manne[pioche.nombrePieces].couleur = piece.couleur;
+				joueur.manne[joueur.nombrePieces].couleur = piece.couleur;
 				joueur.manne[joueur.nombrePieces].numero = piece.numero;
 				
 				piece.couleur = '\0';
