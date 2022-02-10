@@ -5,6 +5,11 @@ import java.util.Scanner;
 
 import com.moumene.util.Util;
 
+
+//this is a test
+
+
+
 /**
  * @author atoudeft
  *
@@ -40,7 +45,6 @@ public class Rummy {
 		joueur2.nom = clavier.next();
 		
 		initialiserPioche(pioche);
-
 		
 		melangerPioche(pioche);
 		distribuerMain(pioche,joueur1,Constantes.TAILLE_MANNE_DEPART);
@@ -149,6 +153,8 @@ public class Rummy {
 	 */
 	public static int getValeur(Piece piece) {
 	
+		
+		
 		return piece.numero;
 	}
 	
@@ -348,12 +354,24 @@ public class Rummy {
 	 * @return true si toutes les pièces de la liste sont dans la main du 
 	 * 		   joueur, false sinon.
 	 */
-	public static boolean valide(Joueur joueur, Piece[] pieces) {
-
-		
+	public static boolean valide(Joueur joueur, Piece[] pieces) {	
 		//recoit pieces et regarde dans main du joueur si il a ces pieces
 		
-		return false;
+		boolean estValide=true;
+		int i, j;
+		
+		
+		for(i = 0; i < pieces.length; i++) {
+			
+			for(j = 0; j < joueur.manne.length; j++) {
+					
+			
+			}
+		}
+
+		
+		
+		return estValide;
 	}
 	
 	/**
@@ -691,5 +709,7 @@ public class Rummy {
 	 */
 	public static void afficherTable() {
 	
+		
+		
 	}
 }
