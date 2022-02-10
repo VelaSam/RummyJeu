@@ -2,7 +2,7 @@ package com.moumene.rummy;
 
 public class Constantes {
 	//Constantes Samuel et Jonathan
-	public static final int VIDE = -1;
+	public static final int VIDE = 0;
 	public static final int TRES_GRAND = 10000;
 	
 	//Maximum de 40 combinaisons sur la table :

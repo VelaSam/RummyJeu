@@ -340,26 +340,55 @@ public class Rummy {
 	 */
 	public static boolean saisieCorrecte(String chaine) {
 
-		boolean rep = false;
+		boolean rep = true;
 		Piece[] aVerifier;
 		int i;
 
 		// Il faut vérifier si pas de lettre consécutif && qu'on reste dans couleurs
 		// dispo
-		for (i = 0; i < chaine.length() - 1; i++) {
-			// if(chaine.charAt(i)='')
+		for (i = 0; i < chaine.length() - 1; i++)
+		{
+			
+			switch(chaine.charAt(i))
+			{
+			case Constantes.BLEU:
+			case Constantes.ROUGE:
+			case Constantes.VERT:
+			case Constantes.NOIR:
+			case '1':
+			case '2':
+			case '3':
+			case '4':
+			case '5':
+			case '6':
+			case '7':
+			case '8':
+			case '9':
+				break;
+			default:
+				rep = false;
+				break;
+			}
 		}
-
-		// On utilise la fct extrairePieces dans le but de séparer les possibilité
-		// et trouver si les nombre son entre 1 a 13 ou 25
-		// On peut utiliser extrairePieces pour trouver les nombre ou s'en inspirer
-		aVerifier = extrairePieces(chaine);
-
-		for (i = 0; i < aVerifier.length; i++) {
-
+		
+		
+		if(rep)
+		{
+			aVerifier = extrairePieces(chaine);
+			for (i = 0; i < aVerifier.length; i++) 
+			{
+				if(aVerifier[i].numero == 25 && aVerifier[i].couleur != Constantes.NOIR)
+					rep = false;
+				if(aVerifier[i].numero != 25 && aVerifier[i].couleur == Constantes.NOIR
+						|| aVerifier[i].numero < 1 || aVerifier[i].numero > 13 && aVerifier[i].numero != 25)
+					rep = false;
+			}
 		}
+			
+		
 
 		return rep;
+		
 	}
 
 	/**
@@ -373,17 +402,25 @@ public class Rummy {
 	public static boolean valide(Joueur joueur, Piece[] pieces) {	
 		//recoit pieces et regarde dans main du joueur si il a ces pieces
 		
-		boolean estValide=true;
-		int i, j;
+		boolean estValide=false;
+		int i, j, cmpt = 0;
+		boolean indexInvalide[] = new boolean[joueur.nombrePieces];// Pour noter les case déjà utiliser
 		
 		
 		for(i = 0; i < pieces.length; i++) {
-			
-			for(j = 0; j < joueur.manne.length; j++) {
+			for(j = 0;  j < joueur.nombrePieces ; j++) 
+			{
+				if(pieces[i] == joueur.manne[j]  && !indexInvalide[j])
+				{
+					cmpt++;
+					indexInvalide[j] = true;
+				}
 					
-			
 			}
 		}
+		
+		if(cmpt == pieces.length)
+			estValide = true;
 
 
 		
@@ -606,10 +643,7 @@ public class Rummy {
 
 		boolean ajoutReussi;
 
-		// PAS SUR SI CEST LA BONNE CONSTANTE ICI
-		// PAS SUR SI CEST LA BONNE CONSTANTE ICI
-		// PAS SUR SI CEST LA BONNE CONSTANTE ICI
-		// PAS SUR SI CEST LA BONNE CONSTANTE ICI:
+
 		if (pioche.nombrePieces >= Constantes.NOMBRE_TOTAL_PIECES)
 			ajoutReussi = false;
 
