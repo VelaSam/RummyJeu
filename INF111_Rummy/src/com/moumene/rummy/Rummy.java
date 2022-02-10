@@ -42,11 +42,7 @@ public class Rummy {
 		joueur2.nom = clavier.next();
 
 		initialiserPioche(pioche);
-<<<<<<< Updated upstream
-		
-=======
 
->>>>>>> Stashed changes
 		melangerPioche(pioche);
 		distribuerMain(pioche, joueur1, Constantes.TAILLE_MANNE_DEPART);
 		distribuerMain(pioche, joueur2, Constantes.TAILLE_MANNE_DEPART);
@@ -141,13 +137,6 @@ public class Rummy {
 	 * @return la valeur de la pièce
 	 */
 	public static int getValeur(Piece piece) {
-<<<<<<< Updated upstream
-	
-		
-		
-=======
-
->>>>>>> Stashed changes
 		return piece.numero;
 	}
 
@@ -248,8 +237,27 @@ public class Rummy {
 	 * @return true si toutes le pièces ont été ajoutées, false sinon.
 	 */
 	public static boolean ajouterPiecesALaCombinaison(Piece[] pieces, int numeroCombinaison) {
-
-		return false;
+		int i, j=0, longeurRestant =0;
+		boolean rep = false;
+		int ptDepart;
+		
+		for(i = 0; i< tableDeJeu[numeroCombinaison-1].length; i++)
+			if(pieces[i] == null)
+				longeurRestant++;
+		
+		if(longeurRestant >= pieces.length)
+		{
+			ptDepart = tableDeJeu[numeroCombinaison-1].length - longeurRestant -1;
+			for(i=ptDepart; i<pieces.length;i++)
+			{
+				tableDeJeu[numeroCombinaison-1][i] = pieces[j];
+				j++;
+			}
+			rep = true;
+		}
+		
+		
+		return rep;
 	}
 
 	/**
@@ -259,8 +267,22 @@ public class Rummy {
 	 * @return true si la nouvelle combinaison a été ajoutée, false sinon.
 	 */
 	public static boolean ajouterNouvelleCombinaisonALaTable(Piece[] pieces) {
-
-		return false;
+		int j, i = 0;
+		boolean rep = false;
+		
+		while(tableDeJeu[i] == null)
+			i++;
+		
+		if(pieces.length <= Constantes.LONGUEUR_MAX_COMBINAISON)
+		{
+			for(j=0; j< pieces.length; j++)
+				tableDeJeu[i][j]= pieces[j];
+			
+			rep = true;
+		}
+			
+		
+		return rep;
 	}
 
 	/***** Méthodes de vérification *****/
@@ -363,15 +385,10 @@ public class Rummy {
 			}
 		}
 
-<<<<<<< Updated upstream
-		
-		
-		return estValide;
-=======
-		// recoit pieces et regarde dans main du joueur si il a ces pieces
 
-		return false;
->>>>>>> Stashed changes
+		
+		// recoit pieces et regarde dans main du joueur si il a ces pieces
+		return estValide;
 	}
 
 	/**
@@ -695,12 +712,21 @@ public class Rummy {
 	 * Affiche le contenu de la table de jeu.
 	 */
 	public static void afficherTable() {
-<<<<<<< Updated upstream
-	
+		int i,j;
 		
+		for(i=0; i<Constantes.MAX_COMBINAISONS; i++)
+		{
+			if(tableDeJeu[i] != null);
+			{
+				System.out.println("Combinaison num"+ i+1 +": ");
+				for(j=0; j < Constantes.LONGUEUR_MAX_COMBINAISON;j++)
+					if(tableDeJeu[i][j] != null)
+						System.out.println(toString(tableDeJeu[i][j]));
+			}
+			
+			System.out.println("\n");
+		}
 		
-=======
-
->>>>>>> Stashed changes
+		return;
 	}
 }
