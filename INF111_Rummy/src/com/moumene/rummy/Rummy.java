@@ -16,290 +16,284 @@ import com.moumene.util.Util;
  */
 public class Rummy {
 
-	//La pioche :
+	// La pioche :
 	public static Pioche pioche = new Pioche();
 
-	//Combinaisons qui sont sur la table :
-	public static Piece[][] tableDeJeu = 
-		new	Piece[Constantes.MAX_COMBINAISONS][Constantes.LONGUEUR_MAX_COMBINAISON];
-	
-	//Indique le nombre effectif de combinaisons sur la table :
+	// Combinaisons qui sont sur la table :
+	public static Piece[][] tableDeJeu = new Piece[Constantes.MAX_COMBINAISONS][Constantes.LONGUEUR_MAX_COMBINAISON];
+
+	// Indique le nombre effectif de combinaisons sur la table :
 	public static int nombreCombinaisonsSurLaTable = 0;
-	
-	//Indique le nombre de pieces dans chaque combinaison :
-	public static int[] nombresPieces = new int[Constantes.MAX_COMBINAISONS];	
-	
+
+	// Indique le nombre de pieces dans chaque combinaison :
+	public static int[] nombresPieces = new int[Constantes.MAX_COMBINAISONS];
+
 	// Pour les saisies au clavier en mode console:
 	public static Scanner clavier = new Scanner(System.in);
-	
-	public static Joueur joueur1 = new Joueur(),
-						 joueur2 = new Joueur(),
-						 joueurActif;
+
+	public static Joueur joueur1 = new Joueur(), joueur2 = new Joueur(), joueurActif;
 
 	public static void main(String[] args) {
-		Piece test[] = extrairePieces(clavier.next());//Pour mon test
-		estUneCombinaison(test);//Pour mon test
+		Piece test[] = extrairePieces(clavier.next());// Pour mon test
+		estUneCombinaison(test);// Pour mon test
 		System.out.print("Nom premier joueur : ");
 		joueur1.nom = clavier.next();
 		System.out.print("Nom deuxième joueur : ");
 		joueur2.nom = clavier.next();
-		
+
 		initialiserPioche(pioche);
+<<<<<<< Updated upstream
 		
+=======
+
+>>>>>>> Stashed changes
 		melangerPioche(pioche);
-		distribuerMain(pioche,joueur1,Constantes.TAILLE_MANNE_DEPART);
-		distribuerMain(pioche,joueur2,Constantes.TAILLE_MANNE_DEPART);
-		
+		distribuerMain(pioche, joueur1, Constantes.TAILLE_MANNE_DEPART);
+		distribuerMain(pioche, joueur2, Constantes.TAILLE_MANNE_DEPART);
+
 		joueurActif = joueur1;
 		while (!mainVide(joueur1) && !mainVide(joueur2)) {
 			faireJouer(joueurActif);
 			passerAuSuivant();
 		}
 		if (mainVide(joueur1)) {
-			System.out.println("Partie terminée. Le gagnant est "+joueur1.nom);
+			System.out.println("Partie terminée. Le gagnant est " + joueur1.nom);
 		} else {
-			System.out.println("Partie terminée. Le gagnant est "+joueur2.nom);
+			System.out.println("Partie terminée. Le gagnant est " + joueur2.nom);
 		}
-		
+
 	}
-	
-/***** Méthodes de déroulement du jeu *****/
-	
+
+	/***** Méthodes de déroulement du jeu *****/
+
 	/**
 	 * Donne le tour au joueur inactif, qui devient le joueur actif
 	 */
 	public static void passerAuSuivant() {
-		
-		joueurActif = joueurActif==joueur1?joueur2:joueur1; 	
-		
+
+		joueurActif = joueurActif == joueur1 ? joueur2 : joueur1;
+
 		return;
 	}
-	
+
 	/**
 	 * Fait jouer un tour au joueur.
+	 * 
 	 * @param joueur
 	 */
 	public static void faireJouer(Joueur joueur) {
 
-		//TOUT CE QUI EST LA DEDANS NEST PAS SUR DETRE BON XD
+		// TOUT CE QUI EST LA DEDANS NEST PAS SUR DETRE BON XD
 		String pieceChoisie;
-	
-		//Afficher la table de jeu;
-		afficherTable();
-		
-		//Afficher la main du joueur;
-		afficherMain(joueur);
-		
-		//Demander au joueur de choisir la liste des pièces de sa main qu’il veut placer;
-		System.out.println("Quelles pieces voulez vous placer?: ");
-		
-		pieceChoisie = clavier.next();
-		
-		//Tant que la liste choisie n’est pas vide Faire
-		
-		
-		//Si la liste constitue une combinaison Alors
-		
-		
-		//Demander au joueur s’il veut constituer une nouvelle combinaison, sinon
-		
-		
-		//à quelle combinaison sur la table il veut l’ajouter
-		
-		
-		//Sinon
-		
-		
-		//Demander au joueur à quelle combinaison sur la table il veut l’ajouter
-		
-		
-		//Fin Si
-		
-		
-		//Réafficher la table de jeu;
-		afficherTable();
-		
-		//Réafficher la main du joueur;
-		afficherMain(joueur);
-		
-		//Demander au joueur de choisir une autre liste de pièces de sa main à placer;
-		
-		
-		//Fin Tant que
-		
-		
-		//Si le joueur n’a placé aucune liste Alors
-		
-		
-		//Demander au joueur de choisir une de ses pièces qui sera échangée avec une
-		
-		
-		//pièce de la pioche;
-		
-		
-		//Fin Si
 
-		
-		
+		// Afficher la table de jeu;
+		afficherTable();
+
+		// Afficher la main du joueur;
+		afficherMain(joueur);
+
+		// Demander au joueur de choisir la liste des pièces de sa main qu’il veut
+		// placer;
+		System.out.println("Quelles pieces voulez vous placer?: ");
+
+		pieceChoisie = clavier.next();
+
+		// Tant que la liste choisie n’est pas vide Faire
+
+		// Si la liste constitue une combinaison Alors
+
+		// Demander au joueur s’il veut constituer une nouvelle combinaison, sinon
+
+		// à quelle combinaison sur la table il veut l’ajouter
+
+		// Sinon
+
+		// Demander au joueur à quelle combinaison sur la table il veut l’ajouter
+
+		// Fin Si
+
+		// Réafficher la table de jeu;
+		afficherTable();
+
+		// Réafficher la main du joueur;
+		afficherMain(joueur);
+
+		// Demander au joueur de choisir une autre liste de pièces de sa main à placer;
+
+		// Fin Tant que
+
+		// Si le joueur n’a placé aucune liste Alors
+
+		// Demander au joueur de choisir une de ses pièces qui sera échangée avec une
+
+		// pièce de la pioche;
+
+		// Fin Si
+
 	}
-	
-	
-/***** Méthodes de manipulation de pièces *****/	
-	
+
+	/***** Méthodes de manipulation de pièces *****/
+
 	/**
 	 * Retourne la valeur d'une piece.
+	 * 
 	 * @param piece la pièce dont on retourne la valeur
 	 * @return la valeur de la pièce
 	 */
 	public static int getValeur(Piece piece) {
+<<<<<<< Updated upstream
 	
 		
 		
+=======
+
+>>>>>>> Stashed changes
 		return piece.numero;
 	}
-	
+
 	/**
 	 * Retourne une chaine de caractère décrivant une piece.
+	 * 
 	 * @param piece la pièce dont on retourne la représentation
 	 * @return la chaine décrivant la pièce
 	 */
 	public static String toString(Piece piece) {
-		return "["+piece.numero+""+piece.couleur+"]";
+		return "[" + piece.numero + "" + piece.couleur + "]";
 	}
-	
+
 	/**
-	 * Retourne un tableau contenant les pièces décrites dans la saisie.
-	 * Cette méthode suppose que la saisie a été vérifiée.
+	 * Retourne un tableau contenant les pièces décrites dans la saisie. Cette
+	 * méthode suppose que la saisie a été vérifiée.
 	 * 
-	 * @param saisie chaine de caractères décrivant une liste de pièces.
-	 * 		  Exemple : 3V12J5V
+	 * @param saisie chaine de caractères décrivant une liste de pièces. Exemple :
+	 *               3V12J5V
 	 * @return tableau contenant les pièces décrites dans la saisie.
 	 */
 	public static Piece[] extrairePieces(String saisie) {
-		//Création
-		int i,j = Constantes.VIDE;
+		// Création
+		int i, j = Constantes.VIDE;
 		char[] stringToChar;
 		String[] pieceNumero;
 		Piece[] piece;
-		
-		//Initialisation
+
+		// Initialisation
 		pieceNumero = saisie.split("[J,V,B,R,N]");
 		stringToChar = saisie.toCharArray();
-			//pieceNumero.length est la référence car elle représente
-			//la grandeur exacte de pieces
+		// pieceNumero.length est la référence car elle représente
+		// la grandeur exacte de pieces
 		piece = new Piece[pieceNumero.length];
-		
-		//On rentre les valeur des numéro des pieces 
-		//contenu dans pieceNumero grace a la commande "split"
-		for(i = 0; i<pieceNumero.length; i++)
-		{
+
+		// On rentre les valeur des numéro des pieces
+		// contenu dans pieceNumero grace a la commande "split"
+		for (i = 0; i < pieceNumero.length; i++) {
 			piece[i] = new Piece();
 			piece[i].numero = Integer.parseInt(pieceNumero[i]);
 		}
-			
-		
-		//Le compteur j indiquera la case dans le tableau @piece correspondant au bon numero
-		for(i = 0; i< stringToChar.length;i++)
-		{
-			if(stringToChar[i]=='J'||stringToChar[i]=='V'||stringToChar[i]=='B'||
-					stringToChar[i]=='R'||stringToChar[i]=='N')
-			{
+
+		// Le compteur j indiquera la case dans le tableau @piece correspondant au bon
+		// numero
+		for (i = 0; i < stringToChar.length; i++) {
+			if (stringToChar[i] == 'J' || stringToChar[i] == 'V' || stringToChar[i] == 'B' || stringToChar[i] == 'R'
+					|| stringToChar[i] == 'N') {
 				j++;
 				piece[j].couleur = stringToChar[i];
-			}		
+			}
 		}
-		
+
 		return piece;
 	}
-	
+
 	/**
 	 * Ajoute une pièce à la main d'un joueur.
+	 * 
 	 * @param joueur le joueur qui recevra la pièce dans sa main
-	 * @param piece la pièce à ajouter
-	 * @return true si la pièce a été ajoutée, false si la pièce n'a pas été
-	 * 		   ajoutée car la main est pleine.	
+	 * @param piece  la pièce à ajouter
+	 * @return true si la pièce a été ajoutée, false si la pièce n'a pas été ajoutée
+	 *         car la main est pleine.
 	 */
 	public static boolean ajouterPiece(Joueur joueur, Piece piece) {
 
-		
 		boolean ajoutReussi;
-			
-			//PAS SUR SI CEST LA BONNE CONSTANTE ICI
-			//PAS SUR SI CEST LA BONNE CONSTANTE ICI
-			//PAS SUR SI CEST LA BONNE CONSTANTE ICI
-			//PAS SUR SI CEST LA BONNE CONSTANTE ICI:
-			if(joueur.nombrePieces >= Constantes.LONGUEUR_MAX_MAIN)
-				ajoutReussi = false;
-			
-			else {
-				
-				joueur.manne[joueur.nombrePieces].couleur = piece.couleur;
-				joueur.manne[joueur.nombrePieces].numero = piece.numero;
-				
-				piece.couleur = '\0';
-				piece.numero = Constantes.VIDE;
-				
-				joueur.nombrePieces++;
-				
-				ajoutReussi = true;
-			}
-			
+
+		// PAS SUR SI CEST LA BONNE CONSTANTE ICI
+		// PAS SUR SI CEST LA BONNE CONSTANTE ICI
+		// PAS SUR SI CEST LA BONNE CONSTANTE ICI
+		// PAS SUR SI CEST LA BONNE CONSTANTE ICI:
+		if (joueur.nombrePieces >= Constantes.LONGUEUR_MAX_MAIN)
+			ajoutReussi = false;
+
+		else {
+
+			joueur.manne[joueur.nombrePieces].couleur = piece.couleur;
+			joueur.manne[joueur.nombrePieces].numero = piece.numero;
+
+			piece.couleur = '\0';
+			piece.numero = Constantes.VIDE;
+
+			joueur.nombrePieces++;
+
+			ajoutReussi = true;
+		}
+
 		return ajoutReussi;
-	}	
-		
+	}
+
 	/**
 	 * Ajouter une liste de pièces à une combinaison de la table de jeu.
-	 * @param pieces tableau contenant les pièces à ajouter
-	 * @param numeroCombinaison le numéro de la combinaison sur la table à
-	 * 							laquelle les pièces vont être ajoutées. La 
-	 * 							première combinaison porte le numéro 1.
-	 * @return true si toutes le pièces ont été ajoutées, false sinon.	
+	 * 
+	 * @param pieces            tableau contenant les pièces à ajouter
+	 * @param numeroCombinaison le numéro de la combinaison sur la table à laquelle
+	 *                          les pièces vont être ajoutées. La première
+	 *                          combinaison porte le numéro 1.
+	 * @return true si toutes le pièces ont été ajoutées, false sinon.
 	 */
-	public static boolean ajouterPiecesALaCombinaison(Piece[] pieces,int numeroCombinaison) {
+	public static boolean ajouterPiecesALaCombinaison(Piece[] pieces, int numeroCombinaison) {
 
 		return false;
 	}
 
 	/**
-	 * Ajouter une liste de pièces dans une nouvelle combinaison de la table de 
-	 * jeu.
+	 * Ajouter une liste de pièces dans une nouvelle combinaison de la table de jeu.
+	 * 
 	 * @param pieces tableau contenant les pièces composant la combinaison.
-	 * @return true si la nouvelle combinaison a été ajoutée, false sinon.	
+	 * @return true si la nouvelle combinaison a été ajoutée, false sinon.
 	 */
 	public static boolean ajouterNouvelleCombinaisonALaTable(Piece[] pieces) {
 
 		return false;
 	}
-	
-/***** Méthodes de vérification *****/	
-	
+
+	/***** Méthodes de vérification *****/
+
 	/**
 	 * Vérifie si la main d'un joueur est vide ou non.
+	 * 
 	 * @param joueur le joueur
 	 * @return true si la main du joueur est vide, false sinon.
 	 */
 	public static boolean mainVide(Joueur joueur) {
 		boolean reponse = true;
 		int i;
-		
-		for(i = 0; i< joueur.manne.length;i++)
-			if(joueur.manne[i] != null && joueur.manne[i].numero != Constantes.VIDE)
+
+		for (i = 0; i < joueur.manne.length; i++)
+			if (joueur.manne[i] != null && joueur.manne[i].numero != Constantes.VIDE)
 				reponse = false;
-		
+
 		return reponse;
 	}
-	
+
 	/**
 	 * Vérifie si un caractère correspond à une couleur du jeu.
+	 * 
 	 * @param caractere
 	 * @return true si le caractère est une couleur valide, false sinon.
 	 */
 	public static boolean estUneCouleurValide(char caractere) {
-		
+
 		boolean reponse;
-		
+
 		switch (caractere) {
-		
+
 		case Constantes.VERT:
 		case Constantes.ROUGE:
 		case Constantes.BLEU:
@@ -311,48 +305,48 @@ public class Rummy {
 			reponse = false;
 			break;
 		}
-		
+
 		return reponse;
-	}	
+	}
 
 	/**
-	 * Vérifie si une chaine de caractères décrit correctement une liste de
-	 * pièces.
+	 * Vérifie si une chaine de caractères décrit correctement une liste de pièces.
+	 * 
 	 * @param chaine la chaine de caractères à vérifier
 	 * @return true, si la chaine est une description correcte d'une liste de
-	 * 			pièces, false sinon.
+	 *         pièces, false sinon.
 	 */
 	public static boolean saisieCorrecte(String chaine) {
-		
+
 		boolean rep = false;
 		Piece[] aVerifier;
 		int i;
-		
-		//Il faut vérifier si pas de lettre consécutif && qu'on reste dans couleurs dispo
-		for (i=0 ; i<chaine.length()-1;i++)
-		{
-			//if(chaine.charAt(i)='')
+
+		// Il faut vérifier si pas de lettre consécutif && qu'on reste dans couleurs
+		// dispo
+		for (i = 0; i < chaine.length() - 1; i++) {
+			// if(chaine.charAt(i)='')
 		}
-		
+
 		// On utilise la fct extrairePieces dans le but de séparer les possibilité
 		// et trouver si les nombre son entre 1 a 13 ou 25
-		//On peut utiliser extrairePieces pour trouver les nombre ou s'en inspirer
+		// On peut utiliser extrairePieces pour trouver les nombre ou s'en inspirer
 		aVerifier = extrairePieces(chaine);
-		
-		for(i=0; i<aVerifier.length; i++)
-		{
-			
+
+		for (i = 0; i < aVerifier.length; i++) {
+
 		}
 
 		return rep;
 	}
-	
+
 	/**
 	 * Vérifie si une liste de pièces fait partie de la main d'un joueur.
+	 * 
 	 * @param joueur le joueur
 	 * @param pieces la liste des pièces
-	 * @return true si toutes les pièces de la liste sont dans la main du 
-	 * 		   joueur, false sinon.
+	 * @return true si toutes les pièces de la liste sont dans la main du joueur,
+	 *         false sinon.
 	 */
 	public static boolean valide(Joueur joueur, Piece[] pieces) {	
 		//recoit pieces et regarde dans main du joueur si il a ces pieces
@@ -369,229 +363,224 @@ public class Rummy {
 			}
 		}
 
+<<<<<<< Updated upstream
 		
 		
 		return estValide;
+=======
+		// recoit pieces et regarde dans main du joueur si il a ces pieces
+
+		return false;
+>>>>>>> Stashed changes
 	}
-	
+
 	/**
 	 * Vérifie si une liste de pièces constitue une combinaison (suite ou série)
+	 * 
 	 * @param pieces la liste des pièces
 	 * @return true si la liste est une combinaison, false sinon.
 	 */
 	public static boolean estUneCombinaison(Piece[] pieces) {
 
 		boolean reponse = true;// par défault on dira que c'est vrais
-		int i,j;
-		int validation=0;
-		int validationNumber=0;
-		
-		if(pieces.length >= 3)
-		{
-			if(pieces.length <= 4)
-			{
+		int i, j;
+		int validation = 0;
+		int validationNumber = 0;
+
+		if (pieces.length >= 3) {
+			if (pieces.length <= 4) {
 				validation = 0;
-				for(i = 0; i < pieces.length-1; i++)
-				{
-					for(j=i+1; j< pieces.length;j++)
-					{
-						if(pieces[i].numero == pieces[j].numero && pieces[i].couleur != pieces[j].couleur|| pieces[j].numero ==25)
-						{
+				for (i = 0; i < pieces.length - 1; i++) {
+					for (j = i + 1; j < pieces.length; j++) {
+						if (pieces[i].numero == pieces[j].numero && pieces[i].couleur != pieces[j].couleur
+								|| pieces[j].numero == 25) {
 							validationNumber++;
 							validation++;
-						}
-						else if(pieces[i].numero != 25)
+						} else if (pieces[i].numero != 25)
 							validationNumber++;
-					}	
+					}
 				}
-				// Pas exactement, mais on essayera de démontrer que c'est peut être une suite pour changer d'avis
-				if(validation != validationNumber)
+				// Pas exactement, mais on essayera de démontrer que c'est peut être une suite
+				// pour changer d'avis
+				if (validation != validationNumber)
 					reponse = false;
-					
-			}
-			else //Si longeur est plus grande que 4, pour rentrer dans reste code il faut false
+
+			} else // Si longeur est plus grande que 4, pour rentrer dans reste code il faut false
 				reponse = false;
-			
-	
-			if(reponse == false)// Si c'est vrais, on ne veux pas modifier la réponse
+
+			if (reponse == false)// Si c'est vrais, on ne veux pas modifier la réponse
 			{
 				validationNumber = 0;
-				validation=0;//Remise a zéro de l'évalution
-				for(i=0; i< pieces.length-1 ; i++)
-				{
-					if(pieces[i].numero+1 == pieces[i+1].numero && pieces[i].couleur == pieces[i+1].couleur || pieces[i+1].numero == 25)
-					{
+				validation = 0;// Remise a zéro de l'évalution
+				for (i = 0; i < pieces.length - 1; i++) {
+					if (pieces[i].numero + 1 == pieces[i + 1].numero && pieces[i].couleur == pieces[i + 1].couleur
+							|| pieces[i + 1].numero == 25) {
 						validation++;
 						validationNumber++;
-					}
-					else if(pieces[i].numero != 25)
+					} else if (pieces[i].numero != 25)
 						validationNumber++;
-				}		
-				
-				if(validation == validationNumber)
-						reponse = true;
+				}
+
+				if (validation == validationNumber)
+					reponse = true;
 			}
-		}
-		else
+		} else
 			reponse = false;
-		
-		
-		
+
 		return reponse;
 	}
 
+	/***** Méthodes de manipulation de la pioche *****/
 
-
-
-/***** Méthodes de manipulation de la pioche *****/	
-	
 	/**
 	 * Retire des pièces d'une pioche et les place dans la main d'un joueur.
-	 * @param pioche la pioche
-	 * @param joueur le joueur
+	 * 
+	 * @param pioche       la pioche
+	 * @param joueur       le joueur
 	 * @param nombrePieces le nombre de pièces à extraire de la pioche
 	 */
-	public static void distribuerMain(Pioche pioche, Joueur joueur,	int nombrePieces) {
+	public static void distribuerMain(Pioche pioche, Joueur joueur, int nombrePieces) {
 
 		int i;
-		
-		for(i = 0; i < nombrePieces && pioche.nombrePieces!=0 ; i++ ) {
-			
-			joueur.manne[joueur.nombrePieces] = pioche.pieces[(Constantes.LONGUEUR_MAX_COMBINAISON-1)-(Constantes.LONGUEUR_MAX_COMBINAISON-pioche.nombrePieces)];
-			pioche.pieces[(Constantes.LONGUEUR_MAX_COMBINAISON-1)-(Constantes.LONGUEUR_MAX_COMBINAISON-pioche.nombrePieces)] = new Piece();
+
+		for (i = 0; i < nombrePieces && pioche.nombrePieces != 0; i++) {
+
+			joueur.manne[joueur.nombrePieces] = pioche.pieces[(Constantes.LONGUEUR_MAX_COMBINAISON - 1)
+					- (Constantes.LONGUEUR_MAX_COMBINAISON - pioche.nombrePieces)];
+			pioche.pieces[(Constantes.LONGUEUR_MAX_COMBINAISON - 1)
+					- (Constantes.LONGUEUR_MAX_COMBINAISON - pioche.nombrePieces)] = new Piece();
 			pioche.nombrePieces--;
 			joueur.nombrePieces++;
 		}
-		
+
 		return;
 	}
-	
+
 	/**
 	 * Extrait une pièce d'une pioche. Le choix de la pièce dépend de
 	 * l'implémentation.
+	 * 
 	 * @param pioche la pioche
 	 * @return la pièce extraite
 	 */
 	public static Piece piocher(Pioche pioche) {
 		Piece piger;
 		int i;
-		//On prend en compte que l'on pige au début du tableau. Il faut donc décaler le restant des pieces pour remplir le trou
+		// On prend en compte que l'on pige au début du tableau. Il faut donc décaler le
+		// restant des pieces pour remplir le trou
 		piger = pioche.pieces[0];
-		
-		for(i=0; i<pioche.nombrePieces;i++)
-		{
-			pioche.pieces[i]= pioche.pieces[i+1];
+
+		for (i = 0; i < pioche.nombrePieces; i++) {
+			pioche.pieces[i] = pioche.pieces[i + 1];
 		}
-		
+
 		pioche.nombrePieces--;
-		
-		return piger;//Pas tester!!!!
+
+		return piger;// Pas tester!!!!
 	}
-	
+
 	/**
-	 * Remplace une pièce d'une pioche par une autre pièce. La pièce 
-	 * remplacée est retournée. La stratégie de choix de la pièce à retirer
-	 * dépend de l'implémentation.
+	 * Remplace une pièce d'une pioche par une autre pièce. La pièce remplacée est
+	 * retournée. La stratégie de choix de la pièce à retirer dépend de
+	 * l'implémentation.
+	 * 
 	 * @param pioche La pioche d'où la pièce va être retirée.
-	 * @param piece La pièce à placer dans la pioche.
+	 * @param piece  La pièce à placer dans la pioche.
 	 * @return La pièce retirée de la pioche.
 	 */
 	public static Piece echanger(Pioche pioche, Piece piece) {
-		
+
 		Random aleatoire = new Random();
 		int nombreAleatoire;
 		Piece temp;
-		
-		//inclus 0, exclus la limite pioche.nombrePieces
+
+		// inclus 0, exclus la limite pioche.nombrePieces
 		nombreAleatoire = aleatoire.nextInt(pioche.nombrePieces);
-		
+
 		temp = pioche.pieces[nombreAleatoire];
 		pioche.pieces[nombreAleatoire] = piece;
 		piece = temp;
-		
-		return piece;//Pas tester !!!
+
+		return piece;// Pas tester !!!
 	}
-	
+
 	/**
 	 * Génére les 106 pièces du jeu et les place dans une pioche.
+	 * 
 	 * @param pioche La pioche où les pièces vont être placées.
 	 */
-	//Place les 106 pieces dans la pioche (incluant les 2 jokers) :
+	// Place les 106 pieces dans la pioche (incluant les 2 jokers) :
 	public static void initialiserPioche(Pioche pioche) {
 		int i, j;
-		
+
 		vider(pioche);
-		//Première 52 pièces
-		for(j = 0; j < Constantes.COULEURS.length; j++)
-		{
-						
-			for(i=0+(Constantes.TREIZE*j); i < Constantes.TREIZE+(Constantes.TREIZE*j); i++)
-			{
-			
+		// Première 52 pièces
+		for (j = 0; j < Constantes.COULEURS.length; j++) {
+
+			for (i = 0 + (Constantes.TREIZE * j); i < Constantes.TREIZE + (Constantes.TREIZE * j); i++) {
+
 				pioche.pieces[i] = new Piece();
-				
-				
-				pioche.pieces[i].numero = i-(Constantes.TREIZE*j)+1; 
+
+				pioche.pieces[i].numero = i - (Constantes.TREIZE * j) + 1;
 				pioche.pieces[i].couleur = Constantes.COULEURS[j];
-				
-				
+
 				pioche.nombrePieces++;
 			}
 		}
-		//2e moitier du paquet jusqu'a 104
-		for(j = 0; j < Constantes.COULEURS.length; j++)
-		{
-						
-			for(i=(((Constantes.NOMBRE_TOTAL_PIECES-2)/2)+(Constantes.TREIZE*j)); i < (((Constantes.NOMBRE_TOTAL_PIECES-2)/2)+Constantes.TREIZE+(Constantes.TREIZE*j)); i++)
-			{
-			
+		// 2e moitier du paquet jusqu'a 104
+		for (j = 0; j < Constantes.COULEURS.length; j++) {
+
+			for (i = (((Constantes.NOMBRE_TOTAL_PIECES - 2) / 2)
+					+ (Constantes.TREIZE * j)); i < (((Constantes.NOMBRE_TOTAL_PIECES - 2) / 2) + Constantes.TREIZE
+							+ (Constantes.TREIZE * j)); i++) {
+
 				pioche.pieces[i] = new Piece();
-				
-				pioche.pieces[i].numero = i-((Constantes.NOMBRE_TOTAL_PIECES-2)/2)-(Constantes.TREIZE*j)+1; 
+
+				pioche.pieces[i].numero = i - ((Constantes.NOMBRE_TOTAL_PIECES - 2) / 2) - (Constantes.TREIZE * j) + 1;
 				pioche.pieces[i].couleur = Constantes.COULEURS[j];
-				
-				
+
 				pioche.nombrePieces++;
 			}
 		}
-		
-		//Initialiser joker1
-		pioche.pieces[Constantes.NOMBRE_TOTAL_PIECES-2] =  new Piece();
-		pioche.pieces[Constantes.NOMBRE_TOTAL_PIECES-2].numero = Constantes.VINGT_CINQ;
-		pioche.pieces[Constantes.NOMBRE_TOTAL_PIECES-2].couleur = Constantes.NOIR;
+
+		// Initialiser joker1
+		pioche.pieces[Constantes.NOMBRE_TOTAL_PIECES - 2] = new Piece();
+		pioche.pieces[Constantes.NOMBRE_TOTAL_PIECES - 2].numero = Constantes.VINGT_CINQ;
+		pioche.pieces[Constantes.NOMBRE_TOTAL_PIECES - 2].couleur = Constantes.NOIR;
 		pioche.nombrePieces++;
-		
-		
-		//Initialiser joker2
-		pioche.pieces[Constantes.NOMBRE_TOTAL_PIECES-1] =  new Piece();
-		pioche.pieces[Constantes.NOMBRE_TOTAL_PIECES-1].numero = Constantes.VINGT_CINQ;
-		pioche.pieces[Constantes.NOMBRE_TOTAL_PIECES-1].couleur = Constantes.NOIR;
+
+		// Initialiser joker2
+		pioche.pieces[Constantes.NOMBRE_TOTAL_PIECES - 1] = new Piece();
+		pioche.pieces[Constantes.NOMBRE_TOTAL_PIECES - 1].numero = Constantes.VINGT_CINQ;
+		pioche.pieces[Constantes.NOMBRE_TOTAL_PIECES - 1].couleur = Constantes.NOIR;
 		pioche.nombrePieces++;
-	
-		return; 
+
+		return;
 
 	}
-	
+
 	/**
 	 * Vide une pioche et y retirant toutes les pièces.
+	 * 
 	 * @param pioche La pioche à vider
 	 */
 	public static void vider(Pioche pioche) {
 
 		int i;
-		
-		for(i = 1; i < (Constantes.NOMBRE_TOTAL_PIECES); i++) {
-		pioche.pieces[i] = new Piece();
-		pioche.pieces[i].couleur = '\0';
-		pioche.pieces[i].numero = Constantes.VIDE;
+
+		for (i = 1; i < (Constantes.NOMBRE_TOTAL_PIECES); i++) {
+			pioche.pieces[i] = new Piece();
+			pioche.pieces[i].couleur = '\0';
+			pioche.pieces[i].numero = Constantes.VIDE;
 		}
 		pioche.nombrePieces = 0;
 		return;
-		
+
 	}
-	
+
 	/**
 	 * Ajoute une pièce à une pioche.
+	 * 
 	 * @param pioche La pioche où la pièce va être ajoutée
 	 * @param pioche La pièce à ajouter
 	 * @return true si l'ajout a réussi, false sinon (faute de place)
@@ -599,116 +588,119 @@ public class Rummy {
 	public static boolean ajouterPiece(Pioche pioche, Piece piece) {
 
 		boolean ajoutReussi;
-		
-		//PAS SUR SI CEST LA BONNE CONSTANTE ICI
-		//PAS SUR SI CEST LA BONNE CONSTANTE ICI
-		//PAS SUR SI CEST LA BONNE CONSTANTE ICI
-		//PAS SUR SI CEST LA BONNE CONSTANTE ICI:
-		if(pioche.nombrePieces >= Constantes.NOMBRE_TOTAL_PIECES)
+
+		// PAS SUR SI CEST LA BONNE CONSTANTE ICI
+		// PAS SUR SI CEST LA BONNE CONSTANTE ICI
+		// PAS SUR SI CEST LA BONNE CONSTANTE ICI
+		// PAS SUR SI CEST LA BONNE CONSTANTE ICI:
+		if (pioche.nombrePieces >= Constantes.NOMBRE_TOTAL_PIECES)
 			ajoutReussi = false;
-		
+
 		else {
-			
+
 			pioche.pieces[pioche.nombrePieces].couleur = piece.couleur;
 			pioche.pieces[pioche.nombrePieces].numero = piece.numero;
-			
+
 			piece.couleur = '\0';
 			piece.numero = Constantes.VIDE;
-			
+
 			pioche.nombrePieces++;
-			
+
 			ajoutReussi = true;
 		}
-		
+
 		return ajoutReussi;
 	}
-	
+
 	/**
 	 * Mélange aléatoirement toutes les pieces de la pioche.
+	 * 
 	 * @param pioche La pioche
 	 */
 	public static void melangerPioche(Pioche pioche) {
 
 		Random aleatoire = new Random();
 		Piece temp;
-		
+
 		int i, j, z;
-		
-		
-		for(i = 0; i < Constantes.TRES_GRAND; i++) {
-			
-			//Generer deux nombres aleatoires 
+
+		for (i = 0; i < Constantes.TRES_GRAND; i++) {
+
+			// Generer deux nombres aleatoires
 			do {
-				
-			j=aleatoire.nextInt(pioche.nombrePieces);
-			z=aleatoire.nextInt(pioche.nombrePieces);
-			
-			}while(j==z);
-			
-			//SWAP :D
+
+				j = aleatoire.nextInt(pioche.nombrePieces);
+				z = aleatoire.nextInt(pioche.nombrePieces);
+
+			} while (j == z);
+
+			// SWAP :D
 			temp = pioche.pieces[j];
-			pioche.pieces[j]=pioche.pieces[z];
-			pioche.pieces[z]=temp;
+			pioche.pieces[j] = pioche.pieces[z];
+			pioche.pieces[z] = temp;
 		}
-		
+
 		return;
 	}
 
+	/***** Méthodes d'affichage *****/
 
-/***** Méthodes d'affichage *****/
-	
 	/**
 	 * Affiche à l'écran les premières pièces d'une liste.
+	 * 
 	 * @param pieces La liste des pièces
 	 * @param nombre Le nombre de pièces de la liste à prendre en considération.
 	 */
 	public static void afficherPieces(Piece[] pieces, int nombre) {
 
 		int i;
-		
-		for(i = 0; i < nombre && i < pieces.length; i++) {
-			
+
+		for (i = 0; i < nombre && i < pieces.length; i++) {
+
 			System.out.print(pieces[i].numero + pieces[i].couleur + " ");
 		}
-		
+
 		System.out.println("");
 		return;
-	}	
-	
+	}
+
 	/**
 	 * Affiche à l'écran la main d'un joueur.
+	 * 
 	 * @param joueur Le joueur
 	 */
 	public static void afficherMain(Joueur joueur) {
 
-		
-		
-		//FONCTION PAS ENCORE TESTEE
+		// FONCTION PAS ENCORE TESTEE
 		int i;
-		
-		//imprime nom du joueur
+
+		// imprime nom du joueur
 		System.out.println(joueur.nom + ": ");
-		
-		//boucle qui va jusquau nombre de pieces du joueur
-		for(i = 0; i < joueur.nombrePieces; i++) {
-			
-			//imprime le numero de la piece
+
+		// boucle qui va jusquau nombre de pieces du joueur
+		for (i = 0; i < joueur.nombrePieces; i++) {
+
+			// imprime le numero de la piece
 			System.out.print(joueur.manne[i].numero);
-			//imprime la couleur de la piece
-			System.out.print(joueur.manne[i].couleur+" ");
-			
-			//on devrait avoir comme exemple: 13J 2V 8B 25N
+			// imprime la couleur de la piece
+			System.out.print(joueur.manne[i].couleur + " ");
+
+			// on devrait avoir comme exemple: 13J 2V 8B 25N
 		}
 		System.out.println("");
 		return;
-	}	
-	
+	}
+
 	/**
 	 * Affiche le contenu de la table de jeu.
 	 */
 	public static void afficherTable() {
+<<<<<<< Updated upstream
 	
 		
 		
+=======
+
+>>>>>>> Stashed changes
 	}
 }
