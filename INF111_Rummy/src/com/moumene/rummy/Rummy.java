@@ -391,7 +391,6 @@ public class Rummy {
 			if(pieces.length <= 4)
 			{
 				validation = 0;
-				//Cas de série sans joker
 				for(i = 0; i < pieces.length-1; i++)
 				{
 					for(j=i+1; j< pieces.length;j++)
@@ -410,6 +409,8 @@ public class Rummy {
 					reponse = false;
 					
 			}
+			else //Si longeur est plus grande que 4, pour rentrer dans reste code il faut false
+				reponse = false;
 			
 	
 			if(reponse == false)// Si c'est vrais, on ne veux pas modifier la réponse
@@ -418,23 +419,21 @@ public class Rummy {
 				validation=0;//Remise a zéro de l'évalution
 				for(i=0; i< pieces.length-1 ; i++)
 				{
-					for(j=i+1; j<pieces.length; j++)
-						if(pieces[i].numero+1 == pieces[j].numero && pieces[i].couleur == pieces[j].couleur || pieces[j].numero == 25)
-						{
-							validation++;
-							validationNumber++;
-						}
-						else if(pieces[i].numero != 25)
-							validationNumber++;
-							
-				}
-				if(validation != validationNumber)
-					reponse = false;
+					if(pieces[i].numero+1 == pieces[i+1].numero && pieces[i].couleur == pieces[i+1].couleur || pieces[i+1].numero == 25)
+					{
+						validation++;
+						validationNumber++;
+					}
+					else if(pieces[i].numero != 25)
+						validationNumber++;
+				}		
+				
+				if(validation == validationNumber)
+						reponse = true;
 			}
 		}
 		else
 			reponse = false;
-		
 		
 		
 		
