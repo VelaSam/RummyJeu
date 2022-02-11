@@ -5,11 +5,6 @@ import java.util.Scanner;
 
 import com.moumene.util.Util;
 
-
-//this is a test
-
-
-
 /**
  * @author atoudeft
  *
@@ -34,8 +29,7 @@ public class Rummy {
 	public static Joueur joueur1 = new Joueur(), joueur2 = new Joueur(), joueurActif;
 
 	public static void main(String[] args) {
-		Piece test[] = extrairePieces(clavier.next());// Pour mon test
-		estUneCombinaison(test);// Pour mon test
+		
 		System.out.print("Nom premier joueur : ");
 		joueur1.nom = clavier.next();
 		System.out.print("Nom deuxième joueur : ");
@@ -204,10 +198,6 @@ public class Rummy {
 
 		boolean ajoutReussi;
 
-		// PAS SUR SI CEST LA BONNE CONSTANTE ICI
-		// PAS SUR SI CEST LA BONNE CONSTANTE ICI
-		// PAS SUR SI CEST LA BONNE CONSTANTE ICI
-		// PAS SUR SI CEST LA BONNE CONSTANTE ICI:
 		if (joueur.nombrePieces >= Constantes.LONGUEUR_MAX_MAIN)
 			ajoutReussi = false;
 
