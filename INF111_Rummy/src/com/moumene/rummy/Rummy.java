@@ -252,12 +252,14 @@ public class Rummy {
 		boolean ajoutReussi;
 
 		if (joueur.nombrePieces >= Constantes.LONGUEUR_MAX_MAIN)
+		{
 			ajoutReussi = false;
+		}
+		else 
+		{
 
-		else {
-
-			joueur.manne[joueur.nombrePieces].couleur = piece.couleur;
-			joueur.manne[joueur.nombrePieces].numero = piece.numero;
+			joueur.manne[joueur.nombrePieces] = piece;
+			
 
 			piece.couleur = '\0';
 			piece.numero = Constantes.VIDE;
@@ -723,8 +725,8 @@ public class Rummy {
 
 		else {
 
-			pioche.pieces[pioche.nombrePieces].couleur = piece.couleur;
-			pioche.pieces[pioche.nombrePieces].numero = piece.numero;
+			pioche.pieces[pioche.nombrePieces] = piece;
+			;
 
 			piece.couleur = '\0';
 			piece.numero = Constantes.VIDE;
