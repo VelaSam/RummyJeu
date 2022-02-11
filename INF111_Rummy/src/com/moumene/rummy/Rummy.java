@@ -103,6 +103,7 @@ public class Rummy {
 						else if(reponseJoueur ==2)
 						{
 							System.out.println("Quel combinaison voulez vous le rajouter?");
+							
 						}
 					}
 			
@@ -339,7 +340,7 @@ public class Rummy {
 
 		// Il faut vérifier si pas de lettre consécutif && qu'on reste dans couleurs
 		// dispo
-		for (i = 0; i < chaine.length() - 1; i++)
+		for (i = 0; i < chaine.length(); i++)
 		{
 			
 			switch(chaine.charAt(i))
