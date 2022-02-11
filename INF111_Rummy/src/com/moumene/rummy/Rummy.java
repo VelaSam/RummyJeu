@@ -94,17 +94,24 @@ public class Rummy {
 				
 				if(estUneCombinaison(tabPieces))
 					{
-						System.out.println("Voulez vous faire une nouvelle combinaison?[1] Ajouter a la table?[2]");
-						reponseJoueur = clavier.nextInt();
-						if(reponseJoueur == 1)
+						if(valide(joueur,tabPieces))
 						{
-							ajouterNouvelleCombinaisonALaTable(tabPieces); 
+							System.out.println("Voulez vous faire une nouvelle combinaison?[1] Ajouter a la table?[2]");
+							reponseJoueur = clavier.nextInt();
+							if(reponseJoueur == 1)
+							{
+								ajouterNouvelleCombinaisonALaTable(tabPieces); 
+							}
+							else if(reponseJoueur ==2)
+							{
+								System.out.println("À quel combinaison voulez vous le rajouter?");
+								reponseJoueur = clavier.nextInt(); 
+								
+								
+								
+							}
 						}
-						else if(reponseJoueur ==2)
-						{
-							System.out.println("Quel combinaison voulez vous le rajouter?");
-							
-						}
+						
 					}
 			
 			
@@ -232,9 +239,17 @@ public class Rummy {
 	 */
 	public static boolean ajouterPiecesALaCombinaison(Piece[] pieces, int numeroCombinaison) {
 		int i, j=0, longeurRestant =0;
-		boolean rep = false;
+		boolean rep = false, estUneCombin = false;
 		int ptDepart;
+		Piece[] combinATester = new Piece[tableDeJeu[numeroCombinaison -1].length];
+		//Remplir le @combinATester des valeur de la combine de la table
+		for(i = 0; i< tableDeJeu[numeroCombinaison -1].length; i++)
+		{
+			combinATester[i].numero = tableDeJeu[numeroCombinaison -1][i].numero;
+			combinATester[i].couleur = tableDeJeu[numeroCombinaison -1][i].couleur;
+		}
 		
+		//On imbrique les pieces dans notre tableau a tester
 		for(i = 0; i< tableDeJeu[numeroCombinaison-1].length; i++)
 			if(pieces[i] == null)
 				longeurRestant++;
@@ -244,10 +259,33 @@ public class Rummy {
 			ptDepart = tableDeJeu[numeroCombinaison-1].length - longeurRestant -1;
 			for(i=ptDepart; i<pieces.length;i++)
 			{
-				tableDeJeu[numeroCombinaison-1][i] = pieces[j];
+				combinATester[i] = pieces[j];
 				j++;
 			}
-			rep = true;
+			estUneCombin = estUneCombinaison(combinATester);
+		}
+		// On teste
+		
+		
+		if(estUneCombin)
+		{
+			j = 0;
+			longeurRestant = 0;
+			for(i = 0; i< tableDeJeu[numeroCombinaison-1].length; i++)
+				if(pieces[i] == null)
+					longeurRestant++;
+			
+			if(longeurRestant >= pieces.length)
+			{
+				ptDepart = tableDeJeu[numeroCombinaison-1].length - longeurRestant -1;
+				for(i=ptDepart; i<pieces.length;i++)
+				{
+					tableDeJeu[numeroCombinaison-1][i] = pieces[j];
+					j++;
+				}
+				rep = true;
+			}
+			
 		}
 		
 		
