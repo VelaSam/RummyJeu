@@ -116,10 +116,6 @@ public class Rummy {
 							repEnregist = ajouterNouvelleCombinaisonALaTable(tabPieces); 
 							if(!repEnregist)
 								System.out.println("Il y a eu un erreur");
-							else
-							{
-								////////////////// REtirer pieces une fois validé
-							}
 						}
 						else if(reponseJoueur ==2)
 						{
@@ -131,12 +127,18 @@ public class Rummy {
 							if(!repEnregist)
 								System.out.println("Vous ne pouvez pas jouer à cette endroit.");
 						}
+						
+						if(repEnregist)
+						{
+							
+						}
 					}
 				}
 				else
 				{
 					if(valide(joueur,tabPieces))
 					{
+						afficherTable();
 						System.out.println("À quel combinaison voulez vous le rajouter?");
 						reponseJoueur = clavier.nextInt(); 
 						
@@ -435,6 +437,7 @@ public class Rummy {
 			case Constantes.ROUGE:
 			case Constantes.VERT:
 			case Constantes.NOIR:
+			case Constantes.JAUNE:
 			case '0':
 			case '1':
 			case '2':
@@ -453,7 +456,7 @@ public class Rummy {
 		}
 		
 		
-		if(rep)
+		if(rep==true)
 		{
 			aVerifier = extrairePieces(chaine);
 			for (i = 0; i < aVerifier.length; i++) 
@@ -506,7 +509,7 @@ public class Rummy {
 		
 		if(cmpt == pieces.length)
 			estValide = true;
-
+		
 
 		
 		// recoit pieces et regarde dans main du joueur si il a ces pieces
@@ -613,13 +616,20 @@ public class Rummy {
 		int i;
 		// On prend en compte que l'on pige au début du tableau. Il faut donc décaler le
 		// restant des pieces pour remplir le trou
-		piger = pioche.pieces[0];
+		if(pioche.nombrePieces >0)
+		{
+			piger = pioche.pieces[0];
 
-		for (i = 0; i < pioche.nombrePieces; i++) {
-			pioche.pieces[i] = pioche.pieces[i + 1];
+			for (i = 0; i < pioche.nombrePieces; i++) 
+			{
+				pioche.pieces[i] = pioche.pieces[i + 1];
+			}
+
+			pioche.nombrePieces--;
 		}
-
-		pioche.nombrePieces--;
+		else
+			piger = new Piece();// Car sera null
+		
 
 		return piger;// Pas tester!!!!
 	}
