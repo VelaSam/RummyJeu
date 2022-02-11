@@ -116,6 +116,10 @@ public class Rummy {
 							repEnregist = ajouterNouvelleCombinaisonALaTable(tabPieces); 
 							if(!repEnregist)
 								System.out.println("Il y a eu un erreur");
+							else
+							{
+								////////////////// REtirer pieces une fois validé
+							}
 						}
 						else if(reponseJoueur ==2)
 						{
@@ -129,47 +133,47 @@ public class Rummy {
 						}
 					}
 				}
-			}
-			else
-			{
-				if(valide(joueur,tabPieces))
+				else
 				{
-					System.out.println("À quel combinaison voulez vous le rajouter?");
-					reponseJoueur = clavier.nextInt(); 
-					
-					repEnregist = ajouterPiecesALaCombinaison(tabPieces,reponseJoueur);
-					
-					if(!repEnregist)
-						System.out.println("Vous ne pouvez pas jouer à cette endroit.");
+					if(valide(joueur,tabPieces))
+					{
+						System.out.println("À quel combinaison voulez vous le rajouter?");
+						reponseJoueur = clavier.nextInt(); 
+						
+						repEnregist = ajouterPiecesALaCombinaison(tabPieces,reponseJoueur);
+						
+						if(!repEnregist)
+							System.out.println("Vous ne pouvez pas jouer à cette endroit.");
+					}
 				}
+			
 				
 			}
 			
 			afficherTable();
 			afficherMain(joueur);
 			
-		}
-		
-		
-		
-		do
-		{
-			System.out.println("Quel pieces de votre main voulez vous échanger?");
-			pieceChoisie = clavier.next();
-			
-			pieceAEchanger = extrairePieces(pieceChoisie);
-			repEnregist = valide(joueur,pieceAEchanger);
-		}while(!repEnregist);
-		
-		pieceARemplacer = echanger(pioche,pieceAEchanger[0]);
-		
-		for(i=0; i< joueur.nombrePieces && !trouve; i++)
-		{
-			if(pieceAEchanger[0]== joueur.manne[i])
+			do
 			{
-				joueur.manne[i] = pieceARemplacer;
-				trouve = true;
+				System.out.println("Quel pieces de votre main voulez vous échanger?");
+				pieceChoisie = clavier.next();
+				
+				pieceAEchanger = extrairePieces(pieceChoisie);
+				repEnregist = valide(joueur,pieceAEchanger);
+			}while(!repEnregist);
+			
+			
+			pieceARemplacer = echanger(pioche,pieceAEchanger[0]);
+			
+			for(i=0; i< joueur.nombrePieces && !trouve; i++)
+			{
+				if(pieceAEchanger[0]== joueur.manne[i])
+				{
+					joueur.manne[i] = pieceARemplacer;
+					trouve = true;
+				}
 			}
+			
 		}
 		
 		return;
@@ -431,6 +435,7 @@ public class Rummy {
 			case Constantes.ROUGE:
 			case Constantes.VERT:
 			case Constantes.NOIR:
+			case '0':
 			case '1':
 			case '2':
 			case '3':
@@ -481,15 +486,19 @@ public class Rummy {
 		boolean estValide=false;
 		int i, j, cmpt = 0;
 		boolean indexInvalide[] = new boolean[joueur.nombrePieces];// Pour noter les case déjà utiliser
+		boolean trouve =false;
 		
 		
 		for(i = 0; i < pieces.length; i++) {
-			for(j = 0;  j < joueur.nombrePieces ; j++) 
+			trouve = false;
+			for(j = 0;  j < joueur.nombrePieces && !trouve ; j++) 
 			{
-				if(pieces[i] == joueur.manne[j]  && !indexInvalide[j])
+				
+				if(pieces[i].numero == joueur.manne[j].numero && pieces[i].couleur == joueur.manne[j].couleur && !indexInvalide[j])
 				{
 					cmpt++;
 					indexInvalide[j] = true;
+					trouve = true;
 				}
 					
 			}
@@ -517,16 +526,21 @@ public class Rummy {
 		int validation = 0;
 		int validationNumber = 0;
 
-		if (pieces.length >= 3) {
-			if (pieces.length <= 4) {
+		if (pieces.length >= 3) 
+		{
+			if (pieces.length <= 4) 
+			{
 				validation = 0;
-				for (i = 0; i < pieces.length - 1; i++) {
-					for (j = i + 1; j < pieces.length; j++) {
-						if (pieces[i].numero == pieces[j].numero && pieces[i].couleur != pieces[j].couleur
-								|| pieces[j].numero == 25) {
+				for (i = 0; i < pieces.length - 1; i++) 
+				{
+					for (j = i + 1; j < pieces.length; j++) 
+					{
+						if (pieces[i].numero == pieces[j].numero && pieces[i].couleur != pieces[j].couleur || pieces[j].numero == 25)
+						{
 							validationNumber++;
 							validation++;
-						} else if (pieces[i].numero != 25)
+						} 
+						else if (pieces[i].numero != 25)
 							validationNumber++;
 					}
 				}
@@ -535,7 +549,8 @@ public class Rummy {
 				if (validation != validationNumber)
 					reponse = false;
 
-			} else // Si longeur est plus grande que 4, pour rentrer dans reste code il faut false
+			} 
+			else // Si longeur est plus grande que 4, pour rentrer dans reste code il faut false
 				reponse = false;
 
 			if (reponse == false)// Si c'est vrais, on ne veux pas modifier la réponse
@@ -805,7 +820,7 @@ public class Rummy {
 		System.out.println(joueur.nom + ": ");
 
 		// boucle qui va jusquau nombre de pieces du joueur
-		for (i = 0; i < joueur.nombrePieces; i++) {
+		for (i = 0; i < joueur.nombrePieces -1; i++) {
 
 			// imprime le numero de la piece
 			System.out.print(joueur.manne[i].numero);
@@ -826,15 +841,16 @@ public class Rummy {
 		
 		for(i=0; i<Constantes.MAX_COMBINAISONS; i++)
 		{
-			if(tableDeJeu[i] != null);
+			if(tableDeJeu[i] == null)
 			{
-				System.out.println("Combinaison num"+ i+1 +": ");
+				System.out.println("Combinaison num"+ (i+1) +": ");
 				for(j=0; j < Constantes.LONGUEUR_MAX_COMBINAISON;j++)
 					if(tableDeJeu[i][j] != null)
 						System.out.println(toString(tableDeJeu[i][j]));
+				
+				System.out.println("");
 			}
 			
-			System.out.println("\n");
 		}
 		
 		return;
