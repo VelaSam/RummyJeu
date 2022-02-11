@@ -166,7 +166,7 @@ public class Rummy {
 			
 			
 			pieceARemplacer = echanger(pioche,pieceAEchanger[0]);
-			
+		//// erreur pieceARemplacer pointe a la même case que pieceAEchanger!!!!!!!!!!
 			for(i=0; i< joueur.nombrePieces && !trouve; i++)
 			{
 				if(pieceAEchanger[0]== joueur.manne[i])
