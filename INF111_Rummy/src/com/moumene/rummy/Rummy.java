@@ -74,10 +74,23 @@ public class Rummy {
 	public static void faireJouer(Joueur joueur) {
 		String pieceChoisie;
 		Piece[] tabPieces; 
+		Piece[] pieceAEchanger;
+		Piece pieceARemplacer;//après aléatoire
+		Piece piocheJoueur;
 		boolean saisieCorrecteBool = true;
+		boolean repEnregist;// Pour utiliser les réponses de nos enregistrement
+		boolean trouve = false;// pour la fouille lors de l'échange
 		int reponseJoueur;
+		int i;
 		
+		piocheJoueur = piocher(pioche);
+		repEnregist = ajouterPiece(joueur,piocheJoueur);
+		if(repEnregist)
+			System.out.println("Vous avez piocher une carte!");
+		else
+			System.out.println("Votre main est pleine, vous ne pouvez plus piger de carte.");
 
+		
 		afficherTable();
 		afficherMain(joueur);
 		
@@ -93,44 +106,73 @@ public class Rummy {
 			{
 				
 				if(estUneCombinaison(tabPieces))
+				{
+					if(valide(joueur,tabPieces))
 					{
-						if(valide(joueur,tabPieces))
+						System.out.println("Voulez vous faire une nouvelle combinaison?[1] Ajouter a la table?[2]");
+						reponseJoueur = clavier.nextInt();
+						if(reponseJoueur == 1)
 						{
-							System.out.println("Voulez vous faire une nouvelle combinaison?[1] Ajouter a la table?[2]");
-							reponseJoueur = clavier.nextInt();
-							if(reponseJoueur == 1)
-							{
-								ajouterNouvelleCombinaisonALaTable(tabPieces); 
-							}
-							else if(reponseJoueur ==2)
-							{
-								System.out.println("À quel combinaison voulez vous le rajouter?");
-								reponseJoueur = clavier.nextInt(); 
-								
-								
-								
-							}
+							repEnregist = ajouterNouvelleCombinaisonALaTable(tabPieces); 
+							if(!repEnregist)
+								System.out.println("Il y a eu un erreur");
 						}
-						
+						else if(reponseJoueur ==2)
+						{
+							System.out.println("À quel combinaison voulez vous le rajouter?");
+							reponseJoueur = clavier.nextInt(); 
+							
+							repEnregist = ajouterPiecesALaCombinaison(tabPieces,reponseJoueur);
+							
+							if(!repEnregist)
+								System.out.println("Vous ne pouvez pas jouer à cette endroit.");
+						}
 					}
-			
-			
+				}
+			}
+			else
+			{
+				if(valide(joueur,tabPieces))
+				{
+					System.out.println("À quel combinaison voulez vous le rajouter?");
+					reponseJoueur = clavier.nextInt(); 
+					
+					repEnregist = ajouterPiecesALaCombinaison(tabPieces,reponseJoueur);
+					
+					if(!repEnregist)
+						System.out.println("Vous ne pouvez pas jouer à cette endroit.");
+				}
+				
 			}
 			
-		
+			afficherTable();
+			afficherMain(joueur);
+			
 		}
-		//Demander au joueur les pièces qu'il veux choisires
 		
 		
 		
+		do
+		{
+			System.out.println("Quel pieces de votre main voulez vous échanger?");
+			pieceChoisie = clavier.next();
+			
+			pieceAEchanger = extrairePieces(pieceChoisie);
+			repEnregist = valide(joueur,pieceAEchanger);
+		}while(!repEnregist);
 		
-
-		afficherTable();
-
+		pieceARemplacer = echanger(pioche,pieceAEchanger[0]);
 		
-		afficherMain(joueur);
-
-
+		for(i=0; i< joueur.nombrePieces && !trouve; i++)
+		{
+			if(pieceAEchanger[0]== joueur.manne[i])
+			{
+				joueur.manne[i] = pieceARemplacer;
+				trouve = true;
+			}
+		}
+		
+		return;
 	}
 
 	/***** Méthodes de manipulation de pièces *****/
