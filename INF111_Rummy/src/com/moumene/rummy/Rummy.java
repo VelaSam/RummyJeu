@@ -72,53 +72,49 @@ public class Rummy {
 	 * @param joueur
 	 */
 	public static void faireJouer(Joueur joueur) {
-
-		// TOUT CE QUI EST LA DEDANS NEST PAS SUR DETRE BON XD
 		String pieceChoisie;
+		Piece[] tabPieces; 
+		boolean saisieCorrecteBool = true;
+		int reponseJoueur;
+		
 
-		// Afficher la table de jeu;
+		afficherTable();
+		afficherMain(joueur);
+		
+		while(saisieCorrecteBool)
+		{
+			System.out.println("Quelles pieces voulez vous placer?: ");
+			pieceChoisie = clavier.next();
+			saisieCorrecteBool = saisieCorrecte(pieceChoisie);
+			
+			
+			tabPieces = extrairePieces(pieceChoisie);
+			if(saisieCorrecteBool)
+			{
+				if(estUneCombinaison(tabPieces))
+					{
+				
+						System.out.println("Voulez vous faire une nouvelle combinaison?[1] Ajouter a la table?[2]");
+						reponseJoueur = clavier.nextInt();
+				
+					}
+			
+			
+			}
+			
+		
+		}
+		//Demander au joueur les pièces qu'il veux choisires
+		
+		
+		
+		
+
 		afficherTable();
 
-		// Afficher la main du joueur;
+		
 		afficherMain(joueur);
 
-		// Demander au joueur de choisir la liste des pièces de sa main qu’il veut
-		// placer;
-		System.out.println("Quelles pieces voulez vous placer?: ");
-
-		pieceChoisie = clavier.next();
-
-		// Tant que la liste choisie n’est pas vide Faire
-
-		// Si la liste constitue une combinaison Alors
-
-		// Demander au joueur s’il veut constituer une nouvelle combinaison, sinon
-
-		// à quelle combinaison sur la table il veut l’ajouter
-
-		// Sinon
-
-		// Demander au joueur à quelle combinaison sur la table il veut l’ajouter
-
-		// Fin Si
-
-		// Réafficher la table de jeu;
-		afficherTable();
-
-		// Réafficher la main du joueur;
-		afficherMain(joueur);
-
-		// Demander au joueur de choisir une autre liste de pièces de sa main à placer;
-
-		// Fin Tant que
-
-		// Si le joueur n’a placé aucune liste Alors
-
-		// Demander au joueur de choisir une de ses pièces qui sera échangée avec une
-
-		// pièce de la pioche;
-
-		// Fin Si
 
 	}
 
