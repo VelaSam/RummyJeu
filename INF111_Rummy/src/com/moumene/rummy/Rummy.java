@@ -91,12 +91,19 @@ public class Rummy {
 			tabPieces = extrairePieces(pieceChoisie);
 			if(saisieCorrecteBool)
 			{
+				
 				if(estUneCombinaison(tabPieces))
 					{
-				
 						System.out.println("Voulez vous faire une nouvelle combinaison?[1] Ajouter a la table?[2]");
 						reponseJoueur = clavier.nextInt();
-				
+						if(reponseJoueur == 1)
+						{
+							ajouterNouvelleCombinaisonALaTable(tabPieces); 
+						}
+						else if(reponseJoueur ==2)
+						{
+							System.out.println("Quel combinaison voulez vous le rajouter?");
+						}
 					}
 			
 			
@@ -174,8 +181,8 @@ public class Rummy {
 		for (i = 0; i < stringToChar.length; i++) {
 			if (stringToChar[i] == 'J' || stringToChar[i] == 'V' || stringToChar[i] == 'B' || stringToChar[i] == 'R'
 					|| stringToChar[i] == 'N') {
-				j++;
 				piece[j].couleur = stringToChar[i];
+				j++;
 			}
 		}
 
