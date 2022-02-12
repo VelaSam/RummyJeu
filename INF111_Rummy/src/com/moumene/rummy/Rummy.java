@@ -28,6 +28,8 @@ public class Rummy {
 
 	public static Joueur joueur1 = new Joueur(), joueur2 = new Joueur(), joueurActif;
 
+	
+	/*
 	public static void main(String[] args) {
 		
 		System.out.print("Nom premier joueur : ");
@@ -56,6 +58,50 @@ public class Rummy {
 
 	/***** Méthodes de déroulement du jeu *****/
 
+	public static void main(String[] args) {
+		
+		Piece[] myPieces = new Piece[3];
+		Piece test = new Piece();
+		Piece test2 = new Piece();
+		
+		test.numero = 10;
+		test.couleur = 'V';
+		
+		test2.numero = 12;
+		test2.couleur = 'n';
+	
+		myPieces[0] = test;
+		myPieces[1] = test2;
+		
+		System.out.println(toString(myPieces[0]));
+		System.out.println(toString(myPieces[1]));
+		/*
+		myPieces[2].couleur = Constantes.ROUGE;
+		myPieces[2].numero =   1;
+		
+		myPieces[3].couleur = Constantes.VERT;
+		myPieces[3].numero =   1;
+		
+		myPieces[4].couleur = Constantes.BLEU;
+		myPieces[4].numero =   1;
+		
+		myPieces[5].couleur = Constantes.BLEU;
+		myPieces[5].numero =   1;
+		
+		
+		estUneCombinaison(myPieces);
+		
+		if(estUneCombinaison(myPieces)) {
+			System.out.println("true");
+		}
+		else {
+			System.out.println("false");
+		}
+		*/
+		
+	}
+	
+	
 	/**
 	 * Donne le tour au joueur inactif, qui devient le joueur actif
 	 */
@@ -189,10 +235,10 @@ public class Rummy {
 	 * @param piece la pièce dont on retourne la valeur
 	 * @return la valeur de la pièce
 	 */
-	public static int getValeur(Piece piece) {
+	public static int getValeur(Piece piece) { //FONCTION GOOD
 		return piece.numero;
 	}
-
+		
 	/**
 	 * Retourne une chaine de caractère décrivant une piece.
 	 * 
@@ -201,8 +247,9 @@ public class Rummy {
 	 */
 	public static String toString(Piece piece) {
 		return "[" + piece.numero + "" + piece.couleur + "]";
+		//fonciton good
 	}
-
+		
 	/**
 	 * Retourne un tableau contenant les pièces décrites dans la saisie. Cette
 	 * méthode suppose que la saisie a été vérifiée.
@@ -267,7 +314,7 @@ public class Rummy {
 			joueur.manne[joueur.nombrePieces] = piece;
 			
 
-			piece.couleur = '\0';
+			piece.couleur = '0';
 			piece.numero = Constantes.VIDE;
 
 			joueur.nombrePieces++;
@@ -562,10 +609,10 @@ public class Rummy {
 				validation = 0;// Remise a zéro de l'évalution
 				for (i = 0; i < pieces.length - 1; i++) {
 					if (pieces[i].numero + 1 == pieces[i + 1].numero && pieces[i].couleur == pieces[i + 1].couleur
-							|| pieces[i + 1].numero == 25) {
+							|| pieces[i + 1].numero == Constantes.VINGT_CINQ) {
 						validation++;
 						validationNumber++;
-					} else if (pieces[i].numero != 25)
+					} else if (pieces[i].numero != Constantes.VINGT_CINQ)
 						validationNumber++;
 				}
 
@@ -589,6 +636,8 @@ public class Rummy {
 	 */
 	public static void distribuerMain(Pioche pioche, Joueur joueur, int nombrePieces) {
 
+		//fonction good 1/2
+		
 		int i;
 
 		for (i = 0; i < nombrePieces && pioche.nombrePieces != 0; i++) {
@@ -612,6 +661,8 @@ public class Rummy {
 	 * @return la pièce extraite
 	 */
 	public static Piece piocher(Pioche pioche) {
+		//fonciton good
+		
 		Piece piger;
 		int i;
 		// On prend en compte que l'on pige au début du tableau. Il faut donc décaler le
@@ -645,18 +696,27 @@ public class Rummy {
 	 */
 	public static Piece echanger(Pioche pioche, Piece piece) {
 
+		
+		//fonction Good
 		Random aleatoire = new Random();
 		int nombreAleatoire;
-		Piece temp;
+		int temp, tempPioche;
+		char tempC, tempPiocheC;
+		
 
 		// inclus 0, exclus la limite pioche.nombrePieces
 		nombreAleatoire = aleatoire.nextInt(pioche.nombrePieces);
 
-		temp = pioche.pieces[nombreAleatoire];
-		pioche.pieces[nombreAleatoire] = piece;
-		piece = temp;
+		temp = pioche.pieces[nombreAleatoire].numero;
+		tempC = pioche.pieces[nombreAleatoire].couleur;
+		tempPioche = piece.numero;
+		tempPiocheC = piece.couleur;
+		pioche.pieces[nombreAleatoire].numero = tempPioche;
+		pioche.pieces[nombreAleatoire].couleur = tempPiocheC;
+		piece.numero = temp;
+		piece.couleur = tempC;
 
-		return piece;// Pas tester !!!
+		return piece;
 	}
 
 	/**
@@ -666,6 +726,9 @@ public class Rummy {
 	 */
 	// Place les 106 pieces dans la pioche (incluant les 2 jokers) :
 	public static void initialiserPioche(Pioche pioche) {
+		
+		//FONCTION GOOD
+		
 		int i, j;
 
 		vider(pioche);
@@ -721,9 +784,10 @@ public class Rummy {
 	 */
 	public static void vider(Pioche pioche) {
 
+		//FONCTION GOOD
 		int i;
 
-		for (i = 1; i < (Constantes.NOMBRE_TOTAL_PIECES); i++) {
+		for (i = 0; i < (Constantes.NOMBRE_TOTAL_PIECES); i++) {
 			pioche.pieces[i] = new Piece();
 			pioche.pieces[i].couleur = '\0';
 			pioche.pieces[i].numero = Constantes.VIDE;
@@ -742,17 +806,23 @@ public class Rummy {
 	 */
 	public static boolean ajouterPiece(Pioche pioche, Piece piece) {
 
+		
+		//	fopmction good
 		boolean ajoutReussi;
-
+		int remplacer;
+		char charRemp;
 
 		if (pioche.nombrePieces >= Constantes.NOMBRE_TOTAL_PIECES)
 			ajoutReussi = false;
 
 		else {
 
-			pioche.pieces[pioche.nombrePieces] = piece;
-			;
-
+			
+			charRemp = piece.couleur;
+			remplacer = piece.numero;
+			pioche.pieces[pioche.nombrePieces].numero = remplacer;
+			pioche.pieces[pioche.nombrePieces].couleur = charRemp;
+			
 			piece.couleur = '\0';
 			piece.numero = Constantes.VIDE;
 
@@ -771,6 +841,9 @@ public class Rummy {
 	 */
 	public static void melangerPioche(Pioche pioche) {
 
+		//FONTION GOOD
+		
+		
 		Random aleatoire = new Random();
 		Piece temp;
 
@@ -805,11 +878,15 @@ public class Rummy {
 	 */
 	public static void afficherPieces(Piece[] pieces, int nombre) {
 
+		//FONCTION GOOD
+		
 		int i;
+		String aPrint;
 
 		for (i = 0; i < nombre && i < pieces.length; i++) {
-
-			System.out.print(pieces[i].numero + pieces[i].couleur + " ");
+			
+			aPrint = toString(pieces[i]);
+			System.out.print(aPrint);
 		}
 
 		System.out.println("");
@@ -823,14 +900,14 @@ public class Rummy {
 	 */
 	public static void afficherMain(Joueur joueur) {
 
-		// FONCTION PAS ENCORE TESTEE
+		// FONCTION GOOD
 		int i;
 
 		// imprime nom du joueur
 		System.out.println(joueur.nom + ": ");
 
 		// boucle qui va jusquau nombre de pieces du joueur
-		for (i = 0; i < joueur.nombrePieces -1; i++) {
+		for (i = 0; i < joueur.nombrePieces; i++) {
 
 			// imprime le numero de la piece
 			System.out.print(joueur.manne[i].numero);
