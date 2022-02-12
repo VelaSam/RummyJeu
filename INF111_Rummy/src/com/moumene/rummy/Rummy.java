@@ -42,6 +42,12 @@ public class Rummy {
 		melangerPioche(pioche);
 		distribuerMain(pioche, joueur1, Constantes.TAILLE_MANNE_DEPART);
 		distribuerMain(pioche, joueur2, Constantes.TAILLE_MANNE_DEPART);
+		
+		
+		
+		
+		
+		
 
 		joueurActif = joueur1;
 		while (!mainVide(joueur1) && !mainVide(joueur2)) {
@@ -98,113 +104,101 @@ public class Rummy {
 	 * @param joueur
 	 */
 	public static void faireJouer(Joueur joueur) {
-		String pieceChoisie;
-		Piece[] tabPieces; 
-		Piece[] pieceAEchanger;
-		Piece pieceARemplacer;//après aléatoire
-		Piece piocheJoueur;
-		boolean saisieCorrecteBool = true;
-		boolean repEnregist;// Pour utiliser les réponses de nos enregistrement
-		boolean trouve = false;// pour la fouille lors de l'échange
-		int reponseJoueur;
+		String repJoueurS;
+		Piece repJoueurP = new Piece();
+		Piece[] repJoueurPS = new Piece[Constantes.LONGUEUR_MAX_COMBINAISON];	
+		int repJoueurI;
+		int pieceI = 0;
 		int i;
-		
-		piocheJoueur = piocher(pioche);
-		repEnregist = ajouterPiece(joueur,piocheJoueur);
-		if(repEnregist)
-			System.out.println("Vous avez piocher une carte!");
-		else
-			System.out.println("Votre main est pleine, vous ne pouvez plus piger de carte.");
-
+		boolean verification;
+		char pieceC = '\0';
 		
 		afficherTable();
 		afficherMain(joueur);
 		
-		while(saisieCorrecteBool)
+		System.out.println("Quest sont les pieces que vous voulez jouer?");
+		repJoueurS = clavier.next();
+		
+		while(repJoueurS.compareTo("-") != 0)//Tant que la saisie n'est pas vide
 		{
-			System.out.println("Quelles pieces voulez vous placer?: ");
-			pieceChoisie = clavier.next();
-			saisieCorrecteBool = saisieCorrecte(pieceChoisie);
-			
-			
-			tabPieces = extrairePieces(pieceChoisie);
-			if(saisieCorrecteBool)
+			if(saisieCorrecte(repJoueurS))// Si les caractères ont de l'allure
 			{
+				repJoueurPS = extrairePieces(repJoueurS);// Une fois la saisie vérifier, il faut la convertire en tableau pour voir si elle est valide avec la main du joueur
 				
-				if(estUneCombinaison(tabPieces))
+				if(valide(joueur, repJoueurPS))
 				{
-					if(valide(joueur,tabPieces))
+					if(estUneCombinaison(repJoueurPS))
 					{
-						System.out.println("Voulez vous faire une nouvelle combinaison?[1] Ajouter a la table?[2]");
-						reponseJoueur = clavier.nextInt();
-						if(reponseJoueur == 1)
-						{
-							repEnregist = ajouterNouvelleCombinaisonALaTable(tabPieces); 
-							if(!repEnregist)
-								System.out.println("Il y a eu un erreur");
-						}
-						else if(reponseJoueur ==2)
-						{
-							System.out.println("À quel combinaison voulez vous le rajouter?");
-							reponseJoueur = clavier.nextInt(); 
-							
-							repEnregist = ajouterPiecesALaCombinaison(tabPieces,reponseJoueur);
-							
-							if(!repEnregist)
-								System.out.println("Vous ne pouvez pas jouer à cette endroit.");
-						}
+						System.out.println("Voulez vous faire une nouvelle combinaison?[0] ou ajouter à une encienne?"
+								+ "\nSi vous voulez completter veuillez choisir le numero de la combinaison que vous voulez.[1..]");
+						repJoueurI = clavier.nextInt();
 						
-						if(repEnregist)
+						if(repJoueurI == 0)
 						{
-							
+							verification = ajouterNouvelleCombinaisonALaTable(repJoueurPS);
+							if(!verification)
+								System.out.println("Une nouvelle combinaison n'a pas été créer!ERREUR!");
 						}
+						else if(repJoueurI >=1)
+						{
+							verification = ajouterPiecesALaCombinaison(repJoueurPS,repJoueurI);
+							if(!verification)
+									System.out.println("Il n'est pas possible de rajouter ces pieces à cette combinaison.");
+						}
+						else
+							System.out.println("Votre saisie n'est pas valide.");				
+					}
+					else if(tableDeJeu[0][0] != null)
+					{
+						System.out.println("À quel combinaison voulez vous rajouter vos pièces?");
+						repJoueurI = clavier.nextInt();
+						verification = ajouterPiecesALaCombinaison(repJoueurPS,repJoueurI);
+						if(!verification)
+									System.out.println("Il n'est pas possible de rajouter ces pieces à cette combinaison.");
 					}
 				}
 				else
-				{
-					if(valide(joueur,tabPieces))
-					{
-						afficherTable();
-						System.out.println("À quel combinaison voulez vous le rajouter?");
-						reponseJoueur = clavier.nextInt(); 
-						
-						repEnregist = ajouterPiecesALaCombinaison(tabPieces,reponseJoueur);
-						
-						if(!repEnregist)
-							System.out.println("Vous ne pouvez pas jouer à cette endroit.");
-					}
-				}
-			
-				
+					System.out.println("Entrée non valide.");
 			}
-			
 			afficherTable();
 			afficherMain(joueur);
 			
-			do
-			{
-				System.out.println("Quel pieces de votre main voulez vous échanger?");
-				pieceChoisie = clavier.next();
-				
-				pieceAEchanger = extrairePieces(pieceChoisie);
-				repEnregist = valide(joueur,pieceAEchanger);
-			}while(!repEnregist);
-			
-			
-			pieceARemplacer = echanger(pioche,pieceAEchanger[0]);
-		//// erreur pieceARemplacer pointe a la même case que pieceAEchanger!!!!!!!!!!
-			for(i=0; i< joueur.nombrePieces && !trouve; i++)
-			{
-				if(pieceAEchanger[0]== joueur.manne[i])
-				{
-					joueur.manne[i] = pieceARemplacer;
-					trouve = true;
-				}
-			}
-			
+			System.out.println("Quel est votre prochain jeu?");
+			repJoueurS = clavier.next();
 		}
 		
-		return;
+		verification = false; //Afin d'initialiser ma condition while
+		while(!verification)
+		{
+			System.out.println("Quel carte désirez vous échanger?");
+			repJoueurS = clavier.next();
+			
+			if(saisieCorrecte(repJoueurS)) //Est ce que c'est les bons caractères
+			{
+				repJoueurPS = extrairePieces(repJoueurS);// On le met en tableau
+				if(valide(joueur,repJoueurPS) && repJoueurPS.length == 1) // Il faut s'assurer que le joueur possède la carte et qu'il n'en as pas sélectionner plus de une
+					verification = true;
+				else
+					System.out.println("Entrée invalide.");
+			}
+		}
+		
+		//Objectif d'annuler les référence et que ce sois par valeur
+		pieceC =repJoueurPS[0].couleur ;
+		pieceI =repJoueurPS[0].numero ;
+		
+		repJoueurP.couleur = pieceC;
+		repJoueurP.numero = pieceI;
+		
+		repJoueurPS[0] = echanger(pioche, repJoueurPS[0]);
+		// A cet instant repJoueurPS[0] détien la nouvelle valeur et repJoueurP est la vieille que le joueur a choisis
+		verification = false;
+		for(i = 0; i< joueur.manne.length && !verification; i++)
+			if(joueur.manne[i].numero == repJoueurP.numero && joueur.manne[i].couleur == repJoueurP.couleur)
+			{
+				joueur.manne[i] = repJoueurPS[0];
+				verification = true;
+			}
 	}
 
 	/***** Méthodes de manipulation de pièces *****/
@@ -391,19 +385,23 @@ public class Rummy {
 	 */
 	public static boolean ajouterNouvelleCombinaisonALaTable(Piece[] pieces) {
 		int j, i = 0;
+		int position;
 		boolean rep = false;
 		
-		while(tableDeJeu[i] == null)
+		while(tableDeJeu[i][0] == null)
+		{
 			i++;
-		
+		}
+			
+		position = Constantes.LONGUEUR_MAX_COMBINAISON - i;
 		if(pieces.length <= Constantes.LONGUEUR_MAX_COMBINAISON)
 		{
 			for(j=0; j< pieces.length; j++)
-				tableDeJeu[i][j]= pieces[j];
+				tableDeJeu[position][j]= pieces[j];
 			
 			rep = true;
 		}
-			
+		
 		
 		return rep;
 	}
@@ -930,7 +928,7 @@ public class Rummy {
 		
 		for(i=0; i<Constantes.MAX_COMBINAISONS; i++)
 		{
-			if(tableDeJeu[i] == null)
+			if(tableDeJeu[i] != null)
 			{
 				System.out.println("Combinaison num"+ (i+1) +": ");
 				for(j=0; j < Constantes.LONGUEUR_MAX_COMBINAISON;j++)
