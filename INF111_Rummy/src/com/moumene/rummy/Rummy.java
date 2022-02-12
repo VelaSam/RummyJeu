@@ -29,7 +29,7 @@ public class Rummy {
 	public static Joueur joueur1 = new Joueur(), joueur2 = new Joueur(), joueurActif;
 
 	
-	/*
+	
 	public static void main(String[] args) {
 		
 		System.out.print("Nom premier joueur : ");
@@ -54,9 +54,9 @@ public class Rummy {
 			System.out.println("Partie terminée. Le gagnant est " + joueur2.nom);
 		}
 
-	}*/
+	}
 	
-	
+	/*
 	public static void main(String[] args) {
 		
 		Piece myPiece = new Piece();
@@ -77,7 +77,7 @@ public class Rummy {
 		
 		
 		
-	}
+	}*/
 
 	/***** Méthodes de déroulement du jeu *****/
 	
@@ -290,6 +290,7 @@ public class Rummy {
 		boolean ajoutReussi;
 		int remplacer;
 		char charRemp;
+		
 
 		if (joueur.nombrePieces >= Constantes.LONGUEUR_MAX_MAIN)
 		{
@@ -300,8 +301,10 @@ public class Rummy {
 			remplacer = piece.numero;
 			charRemp = piece.couleur;
 		
-			joueur.manne[joueur.nombrePieces-1].numero = remplacer;
-			joueur.manne[joueur.nombrePieces-1].couleur = charRemp;
+			joueur.manne[joueur.nombrePieces] = new Piece();
+					
+			joueur.manne[joueur.nombrePieces].numero = remplacer;
+			joueur.manne[joueur.nombrePieces].couleur = charRemp;
 			
 
 			piece.couleur = '\0';
@@ -816,11 +819,12 @@ public class Rummy {
 
 		else {
 
+			pioche.pieces[pioche.nombrePieces] = new Piece();
 			
 			charRemp = piece.couleur;
 			remplacer = piece.numero;
-			pioche.pieces[pioche.nombrePieces-1].numero = remplacer;
-			pioche.pieces[pioche.nombrePieces-1].couleur = charRemp;
+			pioche.pieces[pioche.nombrePieces].numero = remplacer;
+			pioche.pieces[pioche.nombrePieces].couleur = charRemp;
 			
 			piece.couleur = '\0';
 			piece.numero = Constantes.VIDE;
@@ -907,9 +911,9 @@ public class Rummy {
 
 		// boucle qui va jusquau nombre de pieces du joueur
 		for (i = 0; i < joueur.nombrePieces; i++) {
-
-			// imprime le numero de la piece
 			System.out.print(joueur.manne[i].numero);
+			// imprime le numero de la piece
+
 			// imprime la couleur de la piece
 			System.out.print(joueur.manne[i].couleur + " ");
 
