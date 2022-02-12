@@ -82,6 +82,31 @@ public class Rummy {
 		afficherPieces(joueur1.manne, 14);
 		
 		
+			Piece myPice = new Piece();
+		myPice.numero = 25;
+		myPice.couleur= 'V';
+		Piece myPice2 = new Piece();
+		myPice2.numero = 1;
+		myPice2.couleur= 'V';
+		Piece myPice3 = new Piece();
+		myPice3.numero =  4;
+		myPice3.couleur= 'V';
+		
+		Piece[] mesPiesses = new Piece[3];
+		
+		mesPiesses[0] = myPice;
+		mesPiesses[1] = myPice2;
+		mesPiesses[2] = myPice3;
+		
+		afficherPieces(mesPiesses, 3);
+
+		testEstUneComb = estUneCombinaison(mesPiesses);
+				
+		if(testEstUneComb)
+			System.out.println("TRUE");
+		else
+			System.out.println("FALSE");
+		
 		
 	}*/
 
