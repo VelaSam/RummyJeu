@@ -142,9 +142,9 @@ public class Rummy {
 		afficherMain(joueur);
 		
 		System.out.println("Quest sont les pieces que vous voulez jouer?Si vous n'en avez pas faites [-]");
-		repJoueurS = clavier.next();
+		repJoueurS = clavier.nextLine();
 		
-		while(repJoueurS.compareTo("-") != 0)//Tant que la saisie n'est pas vide
+		while(!repJoueurS.equals("") || !repJoueurS.equals(" "))//Tant que la saisie n'est pas vide
 		{
 			if(saisieCorrecte(repJoueurS))// Si les caractères ont de l'allure
 			{
@@ -181,6 +181,8 @@ public class Rummy {
 						if(!verification)
 									System.out.println("Il n'est pas possible de rajouter ces pieces à cette combinaison.");
 					}
+					else
+						System.out.println("Ce n'est pas une bonne combinaison");
 				}
 				else
 					System.out.println("Entrée non valide.");
