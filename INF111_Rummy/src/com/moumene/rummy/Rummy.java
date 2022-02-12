@@ -163,7 +163,7 @@ public class Rummy {
 			afficherTable();
 			afficherMain(joueur);
 			
-			System.out.println("Quel est votre prochain jeu?");
+			System.out.println("Quel est votre prochain jeu?Si vous n'en avez pas faites [-]");
 			repJoueurS = clavier.next();
 		}
 		
@@ -327,12 +327,20 @@ public class Rummy {
 		int i, j=0, longeurRestant =0;
 		boolean rep = false, estUneCombin = false;
 		int ptDepart;
+		int tabJeuI;
+		char tabJeuC;
 		Piece[] combinATester = new Piece[tableDeJeu[numeroCombinaison -1].length];
 		//Remplir le @combinATester des valeur de la combine de la table
 		for(i = 0; i< tableDeJeu[numeroCombinaison -1].length; i++)
 		{
-			combinATester[i].numero = tableDeJeu[numeroCombinaison -1][i].numero;
-			combinATester[i].couleur = tableDeJeu[numeroCombinaison -1][i].couleur;
+			if(tableDeJeu[numeroCombinaison -1][i] != null)
+			{
+				tabJeuI= tableDeJeu[numeroCombinaison -1][i].numero;
+				combinATester[i].numero = tabJeuI;
+				tabJeuC = tableDeJeu[numeroCombinaison -1][i].couleur;
+				combinATester[i].couleur = tabJeuC;
+			}
+			
 		}
 		
 		//On imbrique les pieces dans notre tableau a tester
