@@ -374,13 +374,14 @@ public class Rummy {
 		
 		//On imbrique les pieces dans notre tableau a tester
 		for(i = 0; i< tableDeJeu[numeroCombinaison-1].length; i++)
-			if(tableDeJeu[i] == null)
+			if(tableDeJeu[numeroCombinaison-1][i] == null)
 				longeurRestant++;
 		
 		if(longeurRestant >= pieces.length)
 		{
-			ptDepart = tableDeJeu[numeroCombinaison-1].length - longeurRestant -1;
-			for(i=ptDepart; i<pieces.length;i++)
+			j=0;
+			ptDepart = tableDeJeu[numeroCombinaison-1].length - longeurRestant;
+			for(i=ptDepart; i< ptDepart +pieces.length;i++)
 			{
 				combinATester[i] = pieces[j];
 				j++;
@@ -400,8 +401,8 @@ public class Rummy {
 			
 			if(longeurRestant >= pieces.length)
 			{
-				ptDepart = tableDeJeu[numeroCombinaison-1].length - longeurRestant -1;
-				for(i=ptDepart; i<pieces.length;i++)
+				ptDepart = tableDeJeu[numeroCombinaison-1].length - longeurRestant;
+				for(i=ptDepart; i<ptDepart + pieces.length;i++)
 				{
 					tableDeJeu[numeroCombinaison-1][i] = pieces[j];
 					j++;
@@ -614,7 +615,8 @@ public class Rummy {
 	 */
 	public static boolean estUneCombinaison(Piece[] pieces) {
 
-		//FONCTION GOOD 
+		//Fonction a vérifier, lorsque l'on rajoute une valeur ou plusieur qui sont mauvaise a une combinaison
+		// On compare des pareilles dans la section des suite et pour x raison, les nouvelles pieces sont considérer comme null
 		
 		boolean reponse = true;// par défault on dira que c'est vrais
 		int i, j;
@@ -628,7 +630,7 @@ public class Rummy {
 				validation = 0;
 				for (i = 0; i < pieces.length - Constantes.UN; i++) 
 				{
-					for (j = i + Constantes.UN; j < pieces.length; j++) 
+					for (j = i + Constantes.UN; j < pieces.length; j++) ////AtentionICI
 					{
 						if (pieces[i].numero == pieces[j].numero && pieces[i].couleur != pieces[j].couleur || pieces[j].numero == Constantes.VINGT_CINQ)
 						{
@@ -652,13 +654,20 @@ public class Rummy {
 			{
 				validationNumber = 0;
 				validation = 0;// Remise a zéro de l'évalution
-				for (i = 0; i < pieces.length - Constantes.UN; i++) {
-					if (pieces[i].numero + Constantes.UN == pieces[i + Constantes.UN].numero && pieces[i].couleur == pieces[i + Constantes.UN].couleur
+				for (i = 0; i < pieces.length; i++) {
+					if(pieces[i] != null)
+					{
+						if (pieces[i].numero + Constantes.UN == pieces[i + Constantes.UN].numero && pieces[i].couleur == pieces[i + Constantes.UN].couleur
 							|| pieces[i + Constantes.UN].numero == Constantes.VINGT_CINQ) {
 						validation++;
 						validationNumber++;
-					} else if (pieces[i].numero != Constantes.VINGT_CINQ)
+						} 
+						else if (pieces[i].numero != Constantes.VINGT_CINQ)
+							validationNumber++;
+					}
+					else
 						validationNumber++;
+					
 				}
 
 				if (validation == validationNumber)
@@ -988,6 +997,39 @@ public class Rummy {
 		return;
 	}
 
-	
+	public static void retirerPieceDeMain(Joueur joueur, Piece[] piece) {
+		
+		int i, j;
+		boolean trouvePiece;
+		Piece temp;
+		
+		//Choisir l'index du tableau de Piece
+		
+		
+		for(i = 0; i < piece.length; i++) {
+		//Fouiller le tableau pour trouver cette Piece
+			
+			trouvePiece = false;
+		
+			for(j = 0; j < joueur.manne.length && !trouvePiece; j++) {  //TROUVE LA PIECE ET LA MET 0
+				
+				if(joueur.manne[j] == piece[i]) 
+				{	
+					trouvePiece = true;
+					piece[i].couleur = '\0';
+					piece[i].numero = Constantes.VIDE;
+					joueur.nombrePieces--;
+				}
+			}
+			//switcharoooo
+			temp = joueur.manne[joueur.nombrePieces-1];
+			joueur.manne[joueur.nombrePieces-1] = joueur.manne[j];;
+			joueur.manne[j] = temp;
+			
+		}
+		
+		
+		
+	}
 }
 
