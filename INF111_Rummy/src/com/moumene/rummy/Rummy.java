@@ -29,7 +29,7 @@ public class Rummy {
 	public static Joueur joueur1 = new Joueur(), joueur2 = new Joueur(), joueurActif;
 
 	
-	/*
+	
 	public static void main(String[] args) {
 		
 		System.out.print("Nom premier joueur : ");
@@ -57,56 +57,13 @@ public class Rummy {
 	}
 
 	/***** Méthodes de déroulement du jeu *****/
-
-	public static void main(String[] args) {
-		
-		Piece[] myPieces = new Piece[3];
-		Piece test = new Piece();
-		Piece test2 = new Piece();
-		
-		test.numero = 10;
-		test.couleur = 'V';
-		
-		test2.numero = 12;
-		test2.couleur = 'n';
-	
-		myPieces[0] = test;
-		myPieces[1] = test2;
-		
-		System.out.println(toString(myPieces[0]));
-		System.out.println(toString(myPieces[1]));
-		/*
-		myPieces[2].couleur = Constantes.ROUGE;
-		myPieces[2].numero =   1;
-		
-		myPieces[3].couleur = Constantes.VERT;
-		myPieces[3].numero =   1;
-		
-		myPieces[4].couleur = Constantes.BLEU;
-		myPieces[4].numero =   1;
-		
-		myPieces[5].couleur = Constantes.BLEU;
-		myPieces[5].numero =   1;
-		
-		
-		estUneCombinaison(myPieces);
-		
-		if(estUneCombinaison(myPieces)) {
-			System.out.println("true");
-		}
-		else {
-			System.out.println("false");
-		}
-		*/
-		
-	}
 	
 	
 	/**
 	 * Donne le tour au joueur inactif, qui devient le joueur actif
 	 */
 	public static void passerAuSuivant() {
-
+		//FONCTION GOOD
 		joueurActif = joueurActif == joueur1 ? joueur2 : joueur1;
 
 		return;
@@ -235,7 +192,8 @@ public class Rummy {
 	 * @param piece la pièce dont on retourne la valeur
 	 * @return la valeur de la pièce
 	 */
-	public static int getValeur(Piece piece) { //FONCTION GOOD
+	public static int getValeur(Piece piece) {
+		 //FONCTION GOOD
 		return piece.numero;
 	}
 		
@@ -246,8 +204,9 @@ public class Rummy {
 	 * @return la chaine décrivant la pièce
 	 */
 	public static String toString(Piece piece) {
+		//FONCTION GOOD
 		return "[" + piece.numero + "" + piece.couleur + "]";
-		//fonciton good
+		
 	}
 		
 	/**
@@ -259,6 +218,9 @@ public class Rummy {
 	 * @return tableau contenant les pièces décrites dans la saisie.
 	 */
 	public static Piece[] extrairePieces(String saisie) {
+		
+		//FONCTION GOOD
+		
 		// Création
 		int i, j = Constantes.VIDE;
 		char[] stringToChar;
@@ -301,8 +263,10 @@ public class Rummy {
 	 *         car la main est pleine.
 	 */
 	public static boolean ajouterPiece(Joueur joueur, Piece piece) {
-
+		//FONCTION GOOD
 		boolean ajoutReussi;
+		int remplacer;
+		char charRemp;
 
 		if (joueur.nombrePieces >= Constantes.LONGUEUR_MAX_MAIN)
 		{
@@ -311,10 +275,13 @@ public class Rummy {
 		else 
 		{
 
-			joueur.manne[joueur.nombrePieces] = piece;
+			charRemp = piece.couleur;
+			remplacer = piece.numero;
+			joueur.manne[joueur.nombrePieces].numero = remplacer;
+			joueur.manne[joueur.nombrePieces].couleur = charRemp;
 			
 
-			piece.couleur = '0';
+			piece.couleur = '\0';
 			piece.numero = Constantes.VIDE;
 
 			joueur.nombrePieces++;
@@ -323,6 +290,7 @@ public class Rummy {
 		}
 
 		return ajoutReussi;
+	
 	}
 
 	/**
@@ -423,6 +391,8 @@ public class Rummy {
 	 * @return true si la main du joueur est vide, false sinon.
 	 */
 	public static boolean mainVide(Joueur joueur) {
+		
+		//Fonction pas vrm possible a tester faq va falloir croiser les doigts
 		boolean reponse = true;
 		int i;
 
@@ -441,6 +411,8 @@ public class Rummy {
 	 */
 	public static boolean estUneCouleurValide(char caractere) {
 
+		//FONCTION GOOD
+		
 		boolean reponse;
 
 		switch (caractere) {
@@ -469,6 +441,8 @@ public class Rummy {
 	 */
 	public static boolean saisieCorrecte(String chaine) {
 
+		//FONCTION GOOD
+		
 		boolean rep = true;
 		Piece[] aVerifier;
 		int i;
@@ -533,6 +507,7 @@ public class Rummy {
 	public static boolean valide(Joueur joueur, Piece[] pieces) {	
 		//recoit pieces et regarde dans main du joueur si il a ces pieces
 		
+		//FONCTION GOOD
 		boolean estValide=false;
 		int i, j, cmpt = 0;
 		boolean indexInvalide[] = new boolean[joueur.nombrePieces];// Pour noter les case déjà utiliser
@@ -550,7 +525,6 @@ public class Rummy {
 					indexInvalide[j] = true;
 					trouve = true;
 				}
-					
 			}
 		}
 		
@@ -571,26 +545,28 @@ public class Rummy {
 	 */
 	public static boolean estUneCombinaison(Piece[] pieces) {
 
+		//FONCTION GOOD 
+		
 		boolean reponse = true;// par défault on dira que c'est vrais
 		int i, j;
 		int validation = 0;
 		int validationNumber = 0;
 
-		if (pieces.length >= 3) 
+		if (pieces.length >= Constantes.TROIS) 
 		{
-			if (pieces.length <= 4) 
+			if (pieces.length <= Constantes.QUATRE) 
 			{
 				validation = 0;
-				for (i = 0; i < pieces.length - 1; i++) 
+				for (i = 0; i < pieces.length - Constantes.UN; i++) 
 				{
-					for (j = i + 1; j < pieces.length; j++) 
+					for (j = i + Constantes.UN; j < pieces.length; j++) 
 					{
-						if (pieces[i].numero == pieces[j].numero && pieces[i].couleur != pieces[j].couleur || pieces[j].numero == 25)
+						if (pieces[i].numero == pieces[j].numero && pieces[i].couleur != pieces[j].couleur || pieces[j].numero == Constantes.VINGT_CINQ)
 						{
 							validationNumber++;
 							validation++;
 						} 
-						else if (pieces[i].numero != 25)
+						else if (pieces[i].numero != Constantes.VINGT_CINQ)
 							validationNumber++;
 					}
 				}
@@ -607,9 +583,9 @@ public class Rummy {
 			{
 				validationNumber = 0;
 				validation = 0;// Remise a zéro de l'évalution
-				for (i = 0; i < pieces.length - 1; i++) {
-					if (pieces[i].numero + 1 == pieces[i + 1].numero && pieces[i].couleur == pieces[i + 1].couleur
-							|| pieces[i + 1].numero == Constantes.VINGT_CINQ) {
+				for (i = 0; i < pieces.length - Constantes.UN; i++) {
+					if (pieces[i].numero + Constantes.UN == pieces[i + Constantes.UN].numero && pieces[i].couleur == pieces[i + Constantes.UN].couleur
+							|| pieces[i + Constantes.UN].numero == Constantes.VINGT_CINQ) {
 						validation++;
 						validationNumber++;
 					} else if (pieces[i].numero != Constantes.VINGT_CINQ)
@@ -661,13 +637,14 @@ public class Rummy {
 	 * @return la pièce extraite
 	 */
 	public static Piece piocher(Pioche pioche) {
-		//fonciton good
+
+		//FONCTION GOOD
 		
 		Piece piger;
 		int i;
 		// On prend en compte que l'on pige au début du tableau. Il faut donc décaler le
 		// restant des pieces pour remplir le trou
-		if(pioche.nombrePieces >0)
+		if(pioche.nombrePieces > 0)
 		{
 			piger = pioche.pieces[0];
 
@@ -696,8 +673,8 @@ public class Rummy {
 	 */
 	public static Piece echanger(Pioche pioche, Piece piece) {
 
+		//FONCTION GOOD
 		
-		//fonction Good
 		Random aleatoire = new Random();
 		int nombreAleatoire;
 		int temp, tempPioche;
@@ -806,8 +783,7 @@ public class Rummy {
 	 */
 	public static boolean ajouterPiece(Pioche pioche, Piece piece) {
 
-		
-		//	fopmction good
+		//FONCTION GOOD
 		boolean ajoutReussi;
 		int remplacer;
 		char charRemp;
@@ -942,4 +918,7 @@ public class Rummy {
 		
 		return;
 	}
+
+	
 }
+
