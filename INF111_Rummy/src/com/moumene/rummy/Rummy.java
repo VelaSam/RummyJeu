@@ -200,8 +200,6 @@ public class Rummy {
 				verification = true;
 			}
 		
-		System.out.println("Quest sont les pieces que vous voulez jouer?Si vous n'en avez pas faites [-]");
-		repJoueurS = clavier.next();
 	}
 
 	/***** Méthodes de manipulation de pièces *****/
