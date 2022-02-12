@@ -820,7 +820,6 @@ public class Rummy {
 		else {
 
 			pioche.pieces[pioche.nombrePieces] = new Piece();
-			
 			charRemp = piece.couleur;
 			remplacer = piece.numero;
 			pioche.pieces[pioche.nombrePieces].numero = remplacer;
