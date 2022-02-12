@@ -116,7 +116,7 @@ public class Rummy {
 		afficherTable();
 		afficherMain(joueur);
 		
-		System.out.println("Quest sont les pieces que vous voulez jouer?");
+		System.out.println("Quest sont les pieces que vous voulez jouer?Si vous n'en avez pas faites [-]");
 		repJoueurS = clavier.next();
 		
 		while(repJoueurS.compareTo("-") != 0)//Tant que la saisie n'est pas vide
@@ -199,6 +199,9 @@ public class Rummy {
 				joueur.manne[i] = repJoueurPS[0];
 				verification = true;
 			}
+		
+		System.out.println("Quest sont les pieces que vous voulez jouer?Si vous n'en avez pas faites [-]");
+		repJoueurS = clavier.next();
 	}
 
 	/***** Méthodes de manipulation de pièces *****/
@@ -385,19 +388,26 @@ public class Rummy {
 	 */
 	public static boolean ajouterNouvelleCombinaisonALaTable(Piece[] pieces) {
 		int j, i = 0;
-		int position;
 		boolean rep = false;
 		
-		while(tableDeJeu[i][0] == null)
+		if(tableDeJeu[i][0] == null)
 		{
-			i++;
-		}
 			
-		position = Constantes.LONGUEUR_MAX_COMBINAISON - i;
+		}
+		else
+		{
+			while(tableDeJeu[i][0] != null)
+			{
+				i++;
+			}
+		}
+		
+			
+		
 		if(pieces.length <= Constantes.LONGUEUR_MAX_COMBINAISON)
 		{
 			for(j=0; j< pieces.length; j++)
-				tableDeJeu[position][j]= pieces[j];
+				tableDeJeu[i][j]= pieces[j];
 			
 			rep = true;
 		}
