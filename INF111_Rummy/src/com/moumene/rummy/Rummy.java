@@ -141,11 +141,13 @@ public class Rummy {
 		afficherTable();
 		afficherMain(joueur);
 		
-		System.out.println("Quest sont les pieces que vous voulez jouer?Si vous n'en avez pas faites [-]");
-		repJoueurS = clavier.next();
+		System.out.print("Quest sont les pieces que vous voulez jouer? Si vous n'en avez pas faites ENTREE: ");
+		repJoueurS = clavier.nextLine();
+		repJoueurS = clavier.nextLine();
 		
-		while(repJoueurS.compareTo("-") != 0)//Tant que la saisie n'est pas vide
+		while(!(repJoueurS.isEmpty() || repJoueurS.equals("") || repJoueurS.equals(" ")))//Tant que la saisie n'est pas vide
 		{
+			
 			if(saisieCorrecte(repJoueurS))// Si les caractères ont de l'allure
 			{
 				repJoueurPS = extrairePieces(repJoueurS);// Une fois la saisie vérifier, il faut la convertire en tableau pour voir si elle est valide avec la main du joueur
@@ -190,9 +192,11 @@ public class Rummy {
 			afficherTable();
 			afficherMain(joueur);
 			
-			System.out.println("Quel est votre prochain jeu?Si vous n'en avez pas faites [-]");
-			repJoueurS = clavier.next();
-		}
+			System.out.println("Quel est votre prochain jeu?Si vous n'en avez pas faites ENTREE");
+			repJoueurS = clavier.nextLine();
+			repJoueurS = clavier.nextLine();
+			
+		} 
 		
 		verification = false; //Afin d'initialiser ma condition while
 		while(!verification)
@@ -354,25 +358,23 @@ public class Rummy {
 		int i, j=0, longeurRestant =0;
 		boolean rep = false, estUneCombin = false;
 		int ptDepart;
-		int tabJeuI;
-		char tabJeuC;
 		Piece[] combinATester = new Piece[tableDeJeu[numeroCombinaison -1].length];
+	
 		//Remplir le @combinATester des valeur de la combine de la table
 		for(i = 0; i< tableDeJeu[numeroCombinaison -1].length; i++)
 		{
 			if(tableDeJeu[numeroCombinaison -1][i] != null)
 			{
-				tabJeuI= tableDeJeu[numeroCombinaison -1][i].numero;
-				combinATester[i].numero = tabJeuI;
-				tabJeuC = tableDeJeu[numeroCombinaison -1][i].couleur;
-				combinATester[i].couleur = tabJeuC;
+				combinATester[i] = new Piece();
+				combinATester[i] = tableDeJeu[numeroCombinaison -1][i];
+				
 			}
 			
 		}
 		
 		//On imbrique les pieces dans notre tableau a tester
 		for(i = 0; i< tableDeJeu[numeroCombinaison-1].length; i++)
-			if(pieces[i] == null)
+			if(tableDeJeu[i] == null)
 				longeurRestant++;
 		
 		if(longeurRestant >= pieces.length)
@@ -971,7 +973,7 @@ public class Rummy {
 		
 		for(i=0; i<Constantes.MAX_COMBINAISONS; i++)
 		{
-			if(tableDeJeu[i] != null)
+			if(tableDeJeu[i][0] != null)
 			{
 				System.out.println("Combinaison num"+ (i+1) +": ");
 				for(j=0; j < Constantes.LONGUEUR_MAX_COMBINAISON;j++)
