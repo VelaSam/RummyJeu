@@ -142,9 +142,9 @@ public class Rummy {
 		afficherMain(joueur);
 		
 		System.out.println("Quest sont les pieces que vous voulez jouer?Si vous n'en avez pas faites [-]");
-		repJoueurS = clavier.nextLine();
+		repJoueurS = clavier.next();
 		
-		while(!repJoueurS.equals("") || !repJoueurS.equals(" "))//Tant que la saisie n'est pas vide
+		while(repJoueurS.compareTo("-") != 0)//Tant que la saisie n'est pas vide
 		{
 			if(saisieCorrecte(repJoueurS))// Si les caractères ont de l'allure
 			{
