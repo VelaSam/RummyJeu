@@ -168,7 +168,7 @@ public class Rummy {
 			afficherTable(); //afficherTable
 			afficherMain(joueur);
 			
-			System.out.println("\nQuel est votre prochain jeu? Si vous n'en avez pas faites ENTREE");
+			System.out.println("\nQuel est votre prochain jeu? Si vous n'en avez pas ou que votre main est vide faites ENTREE");
 			repJoueurS = clavier.nextLine();
 			repJoueurS = clavier.nextLine();//ne marche pas si on met juste 1 nextLine() donc 2 fois
 			
@@ -445,8 +445,8 @@ public class Rummy {
 		boolean reponse = true;
 		int i;
 
-		for (i = 0; i < joueur.manne.length && reponse==true; i++)
-			if (joueur.manne[i] != null || joueur.manne[i].numero != Constantes.VIDE || joueur.manne[i].couleur != '\0')
+		for (i = 0; i < joueur.manne.length && reponse; i++)
+			if (joueur.manne[i] != null && (joueur.manne[i].numero != Constantes.VIDE || joueur.manne[i].couleur != '\0'))
 				reponse = false;
 
 		return reponse;
