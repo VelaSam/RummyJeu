@@ -128,12 +128,16 @@ public class Rummy {
 						}
 						else if(repJoueurI >=1) //Si le user a choisi une combinaison deja placee
 						{
-							verification = ajouterPiecesALaCombinaison(repJoueurPS,repJoueurI);
-							if(!verification)
-									System.out.println("Il n'est pas possible de rajouter ces pieces à cette combinaison.");
-							else {
-								enleverPieceDeMain(joueur, repJoueurPS);
+							if(tableDeJeu[repJoueurI][0] != null) {
+								verification = ajouterPiecesALaCombinaison(repJoueurPS,repJoueurI);
+								if(!verification)
+										System.out.println("Il n'est pas possible de rajouter ces pieces à cette combinaison.");
+								else {
+									enleverPieceDeMain(joueur, repJoueurPS);
+								}
 							}
+							else
+								System.out.println("Il n'y a pas de combinaison à cet endroit.");
 						}
 						else
 							System.out.println("Votre saisie n'est pas valide.");//Pas vrm supposer etre vu par le joueur a moins derreur			
@@ -441,8 +445,8 @@ public class Rummy {
 		boolean reponse = true;
 		int i;
 
-		for (i = 0; i < joueur.manne.length; i++)
-			if (joueur.manne[i] != null && joueur.manne[i].numero != Constantes.VIDE)
+		for (i = 0; i < joueur.manne.length && reponse==true; i++)
+			if (joueur.manne[i] != null || joueur.manne[i].numero != Constantes.VIDE || joueur.manne[i].couleur != '\0')
 				reponse = false;
 
 		return reponse;
@@ -994,19 +998,20 @@ public class Rummy {
 		
 			for(j = 0; j < joueur.manne.length && !trouvePiece; j++) {  //TROUVE LA PIECE ET LA MET 0
 				
-				if(joueur.manne[j].couleur == pieces[i].couleur 
-												&& joueur.manne[j].numero == pieces[i].numero)
+				if(joueur.manne[j].couleur == pieces[i].couleur && joueur.manne[j].numero == pieces[i].numero)
 				{	
 					trouvePiece = true;
-					pieces[i].couleur = '\0';
-					pieces[i].numero = Constantes.VIDE;
+					joueur.manne[j].couleur = '\0';
+					joueur.manne[j].numero = Constantes.VIDE;
 					joueur.nombrePieces--;
+					
+					//switcharoooo
+					temp = joueur.manne[joueur.nombrePieces];
+					joueur.manne[joueur.nombrePieces] = joueur.manne[j];
+					joueur.manne[j] = temp;
 				}
 			}
-			//switcharoooo
-			temp = joueur.manne[joueur.nombrePieces-1];
-			joueur.manne[joueur.nombrePieces-1] = joueur.manne[j];;
-			joueur.manne[j] = temp;
+			
 			
 			
 			return;
