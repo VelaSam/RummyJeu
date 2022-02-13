@@ -94,7 +94,7 @@ public class Rummy {
 		afficherTable();
 		afficherMain(joueur);
 		
-		System.out.print("Quest sont les pieces que vous voulez jouer? Si vous n'en avez pas faites ENTREE: ");
+		System.out.print("Quelles sont les pieces que vous voulez jouer? Si vous n'en avez pas faites ENTREE: ");
 		repJoueurS = clavier.nextLine();
 		repJoueurS = clavier.nextLine();//ne marche pas si on met juste 1 nextLine() donc 2 fois
 		
@@ -964,7 +964,7 @@ public class Rummy {
 	 */
 	public static void afficherTable() {
 		int i,j;
-		
+		System.out.println("");
 		for(i=0; i<Constantes.MAX_COMBINAISONS; i++)
 		{
 			if(tableDeJeu[i][0] != null)
