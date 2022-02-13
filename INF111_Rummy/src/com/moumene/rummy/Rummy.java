@@ -61,54 +61,6 @@ public class Rummy {
 		}
 
 	}
-	
-	/*
-	public static void main(String[] args) {
-		
-		Piece myPiece = new Piece();
-		
-		myPiece.couleur = 'X';
-		myPiece.numero = 9999999;
-		
-		initialiserPioche(pioche);
-		
-		distribuerMain(pioche, joueur1, Constantes.TAILLE_MANNE_DEPART);
-		
-		afficherPieces(pioche.pieces, 106);
-		
-		
-		ajouterPiece(joueur1, myPiece);
-		
-		afficherPieces(joueur1.manne, 14);
-		
-		
-			Piece myPice = new Piece();
-		myPice.numero = 25;
-		myPice.couleur= 'V';
-		Piece myPice2 = new Piece();
-		myPice2.numero = 1;
-		myPice2.couleur= 'V';
-		Piece myPice3 = new Piece();
-		myPice3.numero =  4;
-		myPice3.couleur= 'V';
-		
-		Piece[] mesPiesses = new Piece[3];
-		
-		mesPiesses[0] = myPice;
-		mesPiesses[1] = myPice2;
-		mesPiesses[2] = myPice3;
-		
-		afficherPieces(mesPiesses, 3);
-
-		testEstUneComb = estUneCombinaison(mesPiesses);
-				
-		if(testEstUneComb)
-			System.out.println("TRUE");
-		else
-			System.out.println("FALSE");
-		
-		
-	}*/
 
 	/***** Méthodes de déroulement du jeu *****/
 	
@@ -129,6 +81,7 @@ public class Rummy {
 	 * @param joueur
 	 */
 	public static void faireJouer(Joueur joueur) {
+		
 		String repJoueurS;
 		Piece repJoueurP = new Piece();
 		Piece[] repJoueurPS = new Piece[Constantes.LONGUEUR_MAX_COMBINAISON];	
@@ -145,7 +98,7 @@ public class Rummy {
 		repJoueurS = clavier.nextLine();
 		repJoueurS = clavier.nextLine();//ne marche pas si on met juste 1 nextLine() donc 2 fois
 		
-		while(!(repJoueurS.isEmpty() || repJoueurS.equals("") || repJoueurS.equals(" ")))//Tant que la saisie n'est pas vide
+		while(!(repJoueurS.isEmpty() || repJoueurS.equals("") || repJoueurS.equals(" ")) && !mainVide(joueur))//Tant que la saisie n'est pas vide
 		{
 			
 			if(saisieCorrecte(repJoueurS))// Si les caractères ont de l'allure
@@ -167,27 +120,38 @@ public class Rummy {
 							verification = ajouterNouvelleCombinaisonALaTable(repJoueurPS); //
 							if(!verification)
 								System.out.println("!ERREUR! Aucune nouvelle combinaison n'a été créer !ERREUR!");//jamais supposer etre vu par joeur
+						
+							else {
+								enleverPieceDeMain(joueur, repJoueurPS);
+							}
+						
 						}
 						else if(repJoueurI >=1) //Si le user a choisi une combinaison deja placee
 						{
 							verification = ajouterPiecesALaCombinaison(repJoueurPS,repJoueurI);
 							if(!verification)
 									System.out.println("Il n'est pas possible de rajouter ces pieces à cette combinaison.");
+							else {
+								enleverPieceDeMain(joueur, repJoueurPS);
+							}
 						}
 						else
 							System.out.println("Votre saisie n'est pas valide.");//Pas vrm supposer etre vu par le joueur a moins derreur			
 					}
 					else if(tableDeJeu[0][0] != null) //Si deja carte sur la table, tu peux rajouter des combinaisons
 					{
-						System.out.println("À quel combinaison voulez vous rajouter vos pièces?");
+						System.out.println("À quelle combinaison voulez vous rajouter vos pièces?");
 						repJoueurI = clavier.nextInt();
 						verification = ajouterPiecesALaCombinaison(repJoueurPS,repJoueurI);
 						if(!verification)
 									System.out.println("Il n'est pas possible de rajouter ces pieces à cette combinaison.");
+						else {
+							enleverPieceDeMain(joueur, repJoueurPS);
+						}
 					}
 					
 					else //Si rien sur la table, (pas encore de de combinaisons deja placees) 
-						System.out.println("Ce n'est pas une bonne combinaison"); //Deux possibilites de voir cette phrase: Soit le joueur essaye de mettre une/des cartes sur table vide
+						System.out.println("Ceci n'est pas une bonne combinaison"); //Deux possibilites de voir cette phrase: Soit le joueur essaye de mettre une/des cartes sur table vide
 				}																//ou bien joueur saisit mauvais combinaison
 				else //ces cartes ne sont pas dans ses mains
 					System.out.println("Entrée non valide.");
@@ -196,6 +160,7 @@ public class Rummy {
 				System.out.println("Les caractères entrés ne sont pas valides");
 			}
 			
+		
 			afficherTable(); //afficherTable
 			afficherMain(joueur);
 			
@@ -203,40 +168,43 @@ public class Rummy {
 			repJoueurS = clavier.nextLine();
 			repJoueurS = clavier.nextLine();//ne marche pas si on met juste 1 nextLine() donc 2 fois
 			
-		} 
-		
-		verification = false; //Afin d'initialiser ma condition while
-		while(!verification)
-		{
-			System.out.println("Quel carte désirez vous échanger?");
-			repJoueurS = clavier.next();
-			
-			if(saisieCorrecte(repJoueurS)) //Est ce que c'est les bons caractères qui ont etes saisis
-			{
-				repJoueurPS = extrairePieces(repJoueurS);// On le met en tableau on change le String saisi en piece dans un tableau
-				if(valide(joueur,repJoueurPS) && repJoueurPS.length == 1)// Il faut s'assurer que le joueur possède la carte et qu'il n'en as pas sélectionner plus de une
-					verification = true;
-				else
-					System.out.println("Entrée invalide.");
-			}
 		}
 		
-		//Objectif d'annuler les référence et que ce sois par valeur
-		pieceC =repJoueurPS[0].couleur ;
-		pieceI =repJoueurPS[0].numero ;
-		
-		repJoueurP.couleur = pieceC;
-		repJoueurP.numero = pieceI;
-		
-		repJoueurPS[0] = echanger(pioche, repJoueurPS[0]);
-		// A cet instant repJoueurPS[0] détient la nouvelle valeur et repJoueurP est la vieille que le joueur a choisis
-		verification = false;
-		for(i = 0; i< joueur.manne.length && !verification; i++)
-			if(joueur.manne[i].numero == repJoueurP.numero && joueur.manne[i].couleur == repJoueurP.couleur)
+		if(!mainVide(joueur))
+		{
+			verification = false; //Afin d'initialiser ma condition while
+			while(!verification)
 			{
-				joueur.manne[i] = repJoueurPS[0];
-				verification = true;
+				System.out.println("Quel carte désirez vous échanger?");
+				repJoueurS = clavier.next();
+				
+				if(saisieCorrecte(repJoueurS)) //Est ce que c'est les bons caractères qui ont etes saisis
+				{
+					repJoueurPS = extrairePieces(repJoueurS);// On le met en tableau on change le String saisi en piece dans un tableau
+					if(valide(joueur,repJoueurPS) && repJoueurPS.length == 1)// Il faut s'assurer que le joueur possède la carte et qu'il n'en as pas sélectionner plus de une
+						verification = true;
+					else
+						System.out.println("Entrée invalide.");
+				}
 			}
+			
+			//Objectif d'annuler les référence et que ce sois par valeur
+			pieceC =repJoueurPS[0].couleur ;
+			pieceI =repJoueurPS[0].numero ;
+			
+			repJoueurP.couleur = pieceC;
+			repJoueurP.numero = pieceI;
+			
+			repJoueurPS[0] = echanger(pioche, repJoueurPS[0]);
+			// A cet instant repJoueurPS[0] détient la nouvelle valeur et repJoueurP est la vieille que le joueur a choisis
+			verification = false;
+			for(i = 0; i< joueur.manne.length && !verification; i++)
+				if(joueur.manne[i].numero == repJoueurP.numero && joueur.manne[i].couleur == repJoueurP.couleur)
+				{
+					joueur.manne[i] = repJoueurPS[0];
+					verification = true;
+				}
+		}
 		
 	}
 
