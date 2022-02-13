@@ -1003,7 +1003,7 @@ public class Rummy {
 		return;
 	}
 
-	public static void retirerPieceDeMain(Joueur joueur, Piece[] piece) {
+	public static void retirerPieceDeMain(Joueur joueur, Piece[] pieces) {
 		
 		int i, j;
 		boolean trouvePiece;
@@ -1012,18 +1012,19 @@ public class Rummy {
 		//Choisir l'index du tableau de Piece
 		
 		
-		for(i = 0; i < piece.length; i++) {
+		for(i = 0; i < pieces.length; i++) {
 		//Fouiller le tableau pour trouver cette Piece
 			
 			trouvePiece = false;
 		
 			for(j = 0; j < joueur.manne.length && !trouvePiece; j++) {  //TROUVE LA PIECE ET LA MET 0
 				
-				if(joueur.manne[j] == piece[i]) 
+				if(joueur.manne[j].couleur == pieces[i].couleur 
+												&& joueur.manne[j].numero == pieces[i].numero)
 				{	
 					trouvePiece = true;
-					piece[i].couleur = '\0';
-					piece[i].numero = Constantes.VIDE;
+					pieces[i].couleur = '\0';
+					pieces[i].numero = Constantes.VIDE;
 					joueur.nombrePieces--;
 				}
 			}
@@ -1032,6 +1033,8 @@ public class Rummy {
 			joueur.manne[joueur.nombrePieces-1] = joueur.manne[j];;
 			joueur.manne[j] = temp;
 			
+			
+			return;
 		}
 		
 		
