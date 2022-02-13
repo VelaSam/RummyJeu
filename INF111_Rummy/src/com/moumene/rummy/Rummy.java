@@ -143,7 +143,7 @@ public class Rummy {
 		
 		System.out.print("Quest sont les pieces que vous voulez jouer? Si vous n'en avez pas faites ENTREE: ");
 		repJoueurS = clavier.nextLine();
-		repJoueurS = clavier.nextLine();
+		repJoueurS = clavier.nextLine();//ne marche pas si on met juste 1 nextLine() donc 2 fois
 		
 		while(!(repJoueurS.isEmpty() || repJoueurS.equals("") || repJoueurS.equals(" ")))//Tant que la saisie n'est pas vide
 		{
@@ -158,26 +158,26 @@ public class Rummy {
 				{
 					if(estUneCombinaison(repJoueurPS))//Si cest une combinaison
 					{
-						System.out.println("Voulez vous faire une nouvelle combinaison? [0] ou ajouter à une ancienne?"
-								+ "\nSi vous voulez completer veuillez choisir le numero de la combinaison que vous voulez.[1..]");
-						repJoueurI = clavier.nextInt();
+						System.out.println("Voulez vous faire une nouvelle combinaison? [0]" //
+								+ "\nOu sinon, voulez vous ajouter a une autre combinaison déjà placée? Veuillez choisir son numéro[1..]");
+						repJoueurI = clavier.nextInt();  //demande au user cest quoi sa reponse
 						
-						if(repJoueurI == 0)
+						if(repJoueurI == 0) // Si le user a choisi dajouter dajouter une nouvelle combinaison
 						{
-							verification = ajouterNouvelleCombinaisonALaTable(repJoueurPS);
+							verification = ajouterNouvelleCombinaisonALaTable(repJoueurPS); //
 							if(!verification)
-								System.out.println("Une nouvelle combinaison n'a pas été créer!ERREUR!");
+								System.out.println("!ERREUR! Aucune nouvelle combinaison n'a été créer !ERREUR!");//jamais supposer etre vu par joeur
 						}
-						else if(repJoueurI >=1)
+						else if(repJoueurI >=1) //Si le user a choisi une combinaison deja placee
 						{
 							verification = ajouterPiecesALaCombinaison(repJoueurPS,repJoueurI);
 							if(!verification)
 									System.out.println("Il n'est pas possible de rajouter ces pieces à cette combinaison.");
 						}
 						else
-							System.out.println("Votre saisie n'est pas valide.");				
+							System.out.println("Votre saisie n'est pas valide.");//Pas vrm supposer etre vu par le joueur a moins derreur			
 					}
-					else if(tableDeJeu[0][0] != null)
+					else if(tableDeJeu[0][0] != null) //Si deja carte sur la table, tu peux rajouter des combinaisons
 					{
 						System.out.println("À quel combinaison voulez vous rajouter vos pièces?");
 						repJoueurI = clavier.nextInt();
@@ -185,18 +185,23 @@ public class Rummy {
 						if(!verification)
 									System.out.println("Il n'est pas possible de rajouter ces pieces à cette combinaison.");
 					}
-					else
-						System.out.println("Ce n'est pas une bonne combinaison");
-				}
-				else
+					
+					else //Si rien sur la table, (pas encore de de combinaisons deja placees) 
+						System.out.println("Ce n'est pas une bonne combinaison"); //Deux possibilites de voir cette phrase: Soit le joueur essaye de mettre une/des cartes sur table vide
+				}																//ou bien joueur saisit mauvais combinaison
+				else //ces cartes ne sont pas dans ses mains
 					System.out.println("Entrée non valide.");
 			}
-			afficherTable();
+			else { //si invalide
+				System.out.println("Les caractères entrés ne sont pas valides");
+			}
+			
+			afficherTable(); //afficherTable
 			afficherMain(joueur);
 			
-			System.out.println("Quel est votre prochain jeu? Si vous n'en avez pas faites ENTREE");
+			System.out.println("\nQuel est votre prochain jeu? Si vous n'en avez pas faites ENTREE");
 			repJoueurS = clavier.nextLine();
-			repJoueurS = clavier.nextLine();
+			repJoueurS = clavier.nextLine();//ne marche pas si on met juste 1 nextLine() donc 2 fois
 			
 		} 
 		
@@ -206,10 +211,10 @@ public class Rummy {
 			System.out.println("Quel carte désirez vous échanger?");
 			repJoueurS = clavier.next();
 			
-			if(saisieCorrecte(repJoueurS)) //Est ce que c'est les bons caractères
+			if(saisieCorrecte(repJoueurS)) //Est ce que c'est les bons caractères qui ont etes saisis
 			{
-				repJoueurPS = extrairePieces(repJoueurS);// On le met en tableau
-				if(valide(joueur,repJoueurPS) && repJoueurPS.length == 1) // Il faut s'assurer que le joueur possède la carte et qu'il n'en as pas sélectionner plus de une
+				repJoueurPS = extrairePieces(repJoueurS);// On le met en tableau on change le String saisi en piece dans un tableau
+				if(valide(joueur,repJoueurPS) && repJoueurPS.length == 1)// Il faut s'assurer que le joueur possède la carte et qu'il n'en as pas sélectionner plus de une
 					verification = true;
 				else
 					System.out.println("Entrée invalide.");
@@ -224,7 +229,7 @@ public class Rummy {
 		repJoueurP.numero = pieceI;
 		
 		repJoueurPS[0] = echanger(pioche, repJoueurPS[0]);
-		// A cet instant repJoueurPS[0] détien la nouvelle valeur et repJoueurP est la vieille que le joueur a choisis
+		// A cet instant repJoueurPS[0] détient la nouvelle valeur et repJoueurP est la vieille que le joueur a choisis
 		verification = false;
 		for(i = 0; i< joueur.manne.length && !verification; i++)
 			if(joueur.manne[i].numero == repJoueurP.numero && joueur.manne[i].couleur == repJoueurP.couleur)
@@ -1005,7 +1010,7 @@ public class Rummy {
 		return;
 	}
 
-	public static void retirerPieceDeMain(Joueur joueur, Piece[] pieces) {
+	public static void enleverPieceDeMain(Joueur joueur, Piece[] pieces) {
 		
 		int i, j;
 		boolean trouvePiece;
