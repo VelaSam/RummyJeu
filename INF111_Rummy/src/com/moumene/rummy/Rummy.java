@@ -150,14 +150,16 @@ public class Rummy {
 			
 			if(saisieCorrecte(repJoueurS))// Si les caractères ont de l'allure
 			{
-				repJoueurPS = extrairePieces(repJoueurS);// Une fois la saisie vérifier, il faut la convertire en tableau pour voir si elle est valide avec la main du joueur
+				repJoueurPS = extrairePieces(repJoueurS);// Une fois la saisie vérifier, 
+														 // il faut la convertire en tableau pour voir
+														 // si elle est valide avec la main du joueur
 				
-				if(valide(joueur, repJoueurPS))
+				if(valide(joueur, repJoueurPS))//recoit pieces et regarde dans main du joueur si il a ces pieces
 				{
-					if(estUneCombinaison(repJoueurPS))
+					if(estUneCombinaison(repJoueurPS))//Si cest une combinaison
 					{
-						System.out.println("Voulez vous faire une nouvelle combinaison?[0] ou ajouter à une encienne?"
-								+ "\nSi vous voulez completter veuillez choisir le numero de la combinaison que vous voulez.[1..]");
+						System.out.println("Voulez vous faire une nouvelle combinaison? [0] ou ajouter à une ancienne?"
+								+ "\nSi vous voulez completer veuillez choisir le numero de la combinaison que vous voulez.[1..]");
 						repJoueurI = clavier.nextInt();
 						
 						if(repJoueurI == 0)
@@ -192,7 +194,7 @@ public class Rummy {
 			afficherTable();
 			afficherMain(joueur);
 			
-			System.out.println("Quel est votre prochain jeu?Si vous n'en avez pas faites ENTREE");
+			System.out.println("Quel est votre prochain jeu? Si vous n'en avez pas faites ENTREE");
 			repJoueurS = clavier.nextLine();
 			repJoueurS = clavier.nextLine();
 			
@@ -394,10 +396,10 @@ public class Rummy {
 		if(estUneCombin)
 		{
 			j = 0;
-			longeurRestant = 0;
-			for(i = 0; i< tableDeJeu[numeroCombinaison-1].length; i++)
-				if(pieces[i] == null)
-					longeurRestant++;
+			//longeurRestant = 0;
+			//for(i = 0; i< tableDeJeu[numeroCombinaison-1].length; i++)
+			//	if(pieces[i] == null)
+			//		longeurRestant++;
 			
 			if(longeurRestant >= pieces.length)
 			{
