@@ -642,8 +642,8 @@ public class Rummy {
 				for (i = 0; i < (lengthUse-1); i++) {// Moins un de plus car on vérifie avec le suivant 
 					if(pieces[i] != null)
 					{
-						if (pieces[i].numero + Constantes.UN == pieces[i + Constantes.UN].numero && pieces[i].couleur == pieces[i + Constantes.UN].couleur
-							|| pieces[i + Constantes.UN].numero == Constantes.VINGT_CINQ) {
+						if ((pieces[i].numero + Constantes.UN == pieces[i + Constantes.UN].numero && pieces[i].couleur == pieces[i + Constantes.UN].couleur
+							|| pieces[i + Constantes.UN].numero == Constantes.VINGT_CINQ)&& pieces[i].numero <13) {
 						validation++;
 						validationNumber++;
 						} 
