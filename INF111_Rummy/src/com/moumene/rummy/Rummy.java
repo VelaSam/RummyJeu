@@ -622,15 +622,21 @@ public class Rummy {
 		int i, j;
 		int validation = 0;
 		int validationNumber = 0;
+		int lengthUse =0;
+		
+		//Utilité ou il y a des pieces null dans le tableau et qui fausse la réalité de pieces.length
+		for(i=0; i< pieces.length; i++)
+			if(pieces[i] != null)
+				lengthUse++;
 
-		if (pieces.length >= Constantes.TROIS) 
+		if (lengthUse >= Constantes.TROIS) 
 		{
-			if (pieces.length <= Constantes.QUATRE) 
+			if (lengthUse <= Constantes.QUATRE) ////Il y a eu un bug ici! 8B8J8V et rajout 25N
 			{
 				validation = 0;
-				for (i = 0; i < pieces.length - Constantes.UN; i++) 
+				for (i = 0; i < lengthUse - Constantes.UN; i++) 
 				{
-					for (j = i + Constantes.UN; j < pieces.length; j++) ////AtentionICI
+					for (j = i + Constantes.UN; j < lengthUse; j++) 
 					{
 						if (pieces[i].numero == pieces[j].numero && pieces[i].couleur != pieces[j].couleur || pieces[j].numero == Constantes.VINGT_CINQ)
 						{
@@ -654,7 +660,7 @@ public class Rummy {
 			{
 				validationNumber = 0;
 				validation = 0;// Remise a zéro de l'évalution
-				for (i = 0; i < pieces.length; i++) {
+				for (i = 0; i < (lengthUse-1); i++) {// Moins un de plus car on vérifie avec le suivant 
 					if(pieces[i] != null)
 					{
 						if (pieces[i].numero + Constantes.UN == pieces[i + Constantes.UN].numero && pieces[i].couleur == pieces[i + Constantes.UN].couleur
