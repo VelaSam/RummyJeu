@@ -1011,13 +1011,9 @@ public class Rummy {
 					joueur.manne[j] = temp;
 				}
 			}
-			
-			
-			
-			return;
 		}
 		
-		
+		return;
 		
 	}
 }
