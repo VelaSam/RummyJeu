@@ -39,7 +39,7 @@ public class Rummy {
 
 		initialiserPioche(pioche);
 
-		melangerPioche(pioche);
+		//melangerPioche(pioche);
 		distribuerMain(pioche, joueur1, Constantes.TAILLE_MANNE_DEPART);
 		distribuerMain(pioche, joueur2, Constantes.TAILLE_MANNE_DEPART);
 		
