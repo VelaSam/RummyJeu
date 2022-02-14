@@ -39,7 +39,7 @@ public class Rummy {
 
 		initialiserPioche(pioche);
 
-		//melangerPioche(pioche);
+		melangerPioche(pioche);
 		distribuerMain(pioche, joueur1, Constantes.TAILLE_MANNE_DEPART);
 		distribuerMain(pioche, joueur2, Constantes.TAILLE_MANNE_DEPART);
 		
@@ -111,8 +111,8 @@ public class Rummy {
 				{
 					if(estUneCombinaison(repJoueurPS))//Si cest une combinaison
 					{
-						System.out.println("Voulez vous faire une nouvelle combinaison? [0]" //
-								+ "\nOu sinon, voulez vous ajouter a une autre combinaison déjà placée? Veuillez choisir son numéro[1..]");
+						System.out.println("Si vous voulez en faire une nouvelle combinaison, faites: [0]" //
+								+ "\nSi vous voulez ajouter des pièces à une autre combinaison déjà placée. Veuillez indiquer son numéro[1..]: ");
 						repJoueurI = clavier.nextInt();  //demande au user cest quoi sa reponse
 						
 						if(repJoueurI == 0) // Si le user a choisi dajouter dajouter une nouvelle combinaison
@@ -168,7 +168,7 @@ public class Rummy {
 			afficherTable(); //afficherTable
 			afficherMain(joueur);
 			
-			System.out.println("\nQuel est votre prochain jeu? Si vous n'en avez pas ou que votre main est vide faites ENTREE");
+			System.out.println("Quel est votre prochain jeu? Si vous n'en avez pas ou que votre main est vide faites ENTREE: ");
 			repJoueurS = clavier.nextLine();
 			repJoueurS = clavier.nextLine();//ne marche pas si on met juste 1 nextLine() donc 2 fois
 			
@@ -179,7 +179,7 @@ public class Rummy {
 			verification = false; //Afin d'initialiser ma condition while
 			while(!verification)
 			{
-				System.out.println("Quel carte désirez vous échanger?");
+				System.out.println("Quelle carte désirez vous échanger?");
 				repJoueurS = clavier.next();
 				
 				if(saisieCorrecte(repJoueurS)) //Est ce que c'est les bons caractères qui ont etes saisis
@@ -418,7 +418,6 @@ public class Rummy {
 		}
 		
 			
-		
 		if(pieces.length <= Constantes.LONGUEUR_MAX_COMBINAISON)
 		{
 			for(j=0; j< pieces.length; j++)
@@ -531,10 +530,10 @@ public class Rummy {
 			aVerifier = extrairePieces(chaine);
 			for (i = 0; i < aVerifier.length; i++) 
 			{
-				if(aVerifier[i].numero == 25 && aVerifier[i].couleur != Constantes.NOIR)
+				if(aVerifier[i].numero == Constantes.VINGT_CINQ && aVerifier[i].couleur != Constantes.NOIR)
 					rep = false;
-				if(aVerifier[i].numero != 25 && aVerifier[i].couleur == Constantes.NOIR
-						|| aVerifier[i].numero < 1 || aVerifier[i].numero > 13 && aVerifier[i].numero != 25)
+				if(aVerifier[i].numero != Constantes.VINGT_CINQ && aVerifier[i].couleur == Constantes.NOIR
+						|| aVerifier[i].numero < 1 || aVerifier[i].numero > Constantes.TREIZE && aVerifier[i].numero != Constantes.VINGT_CINQ)
 					rep = false;
 			}
 		}
@@ -643,7 +642,9 @@ public class Rummy {
 					if(pieces[i] != null)
 					{
 						if ((pieces[i].numero + Constantes.UN == pieces[i + Constantes.UN].numero && pieces[i].couleur == pieces[i + Constantes.UN].couleur
-							|| pieces[i + Constantes.UN].numero == Constantes.VINGT_CINQ)&& pieces[i].numero <13) {
+							|| pieces[i + Constantes.UN].numero == Constantes.VINGT_CINQ)&& pieces[i].numero < Constantes.TREIZE)//la derniere verificiation reviens a verifier 
+						{ 																									 //la longueur max de combinaison
+																																	
 						validation++;
 						validationNumber++;
 						} 
@@ -722,7 +723,7 @@ public class Rummy {
 			piger = new Piece();// Car sera null
 		
 
-		return piger;// Pas tester!!!!
+		return piger;
 	}
 
 	/**
@@ -788,13 +789,13 @@ public class Rummy {
 		// 2e moitier du paquet jusqu'a 104
 		for (j = 0; j < Constantes.COULEURS.length; j++) {
 
-			for (i = (((Constantes.NOMBRE_TOTAL_PIECES - 2) / 2)
-					+ (Constantes.TREIZE * j)); i < (((Constantes.NOMBRE_TOTAL_PIECES - 2) / 2) + Constantes.TREIZE
+			for (i = (((Constantes.NOMBRE_TOTAL_PIECES - Constantes.DEUX) / Constantes.DEUX)
+					+ (Constantes.TREIZE * j)); i < (((Constantes.NOMBRE_TOTAL_PIECES - Constantes.DEUX) / Constantes.DEUX) + Constantes.TREIZE
 							+ (Constantes.TREIZE * j)); i++) {
 
 				pioche.pieces[i] = new Piece();
 
-				pioche.pieces[i].numero = i - ((Constantes.NOMBRE_TOTAL_PIECES - 2) / 2) - (Constantes.TREIZE * j) + 1;
+				pioche.pieces[i].numero = i - ((Constantes.NOMBRE_TOTAL_PIECES - Constantes.DEUX) / Constantes.DEUX) - (Constantes.TREIZE * j) + 1;
 				pioche.pieces[i].couleur = Constantes.COULEURS[j];
 
 				pioche.nombrePieces++;
@@ -802,9 +803,9 @@ public class Rummy {
 		}
 
 		// Initialiser joker1
-		pioche.pieces[Constantes.NOMBRE_TOTAL_PIECES - 2] = new Piece();
-		pioche.pieces[Constantes.NOMBRE_TOTAL_PIECES - 2].numero = Constantes.VINGT_CINQ;
-		pioche.pieces[Constantes.NOMBRE_TOTAL_PIECES - 2].couleur = Constantes.NOIR;
+		pioche.pieces[Constantes.NOMBRE_TOTAL_PIECES - Constantes.DEUX] = new Piece();
+		pioche.pieces[Constantes.NOMBRE_TOTAL_PIECES - Constantes.DEUX].numero = Constantes.VINGT_CINQ;
+		pioche.pieces[Constantes.NOMBRE_TOTAL_PIECES - Constantes.DEUX].couleur = Constantes.NOIR;
 		pioche.nombrePieces++;
 
 		// Initialiser joker2
@@ -972,13 +973,13 @@ public class Rummy {
 				System.out.println("Combinaison num"+ (i+1) +": ");
 				for(j=0; j < Constantes.LONGUEUR_MAX_COMBINAISON;j++)
 					if(tableDeJeu[i][j] != null)
-						System.out.println(toString(tableDeJeu[i][j]));
+						System.out.print(" "+toString(tableDeJeu[i][j]));
 				
 				System.out.println("");
 			}
-			
-		}
 		
+		}
+		System.out.println("");
 		return;
 	}
 
