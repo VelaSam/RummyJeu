@@ -1,5 +1,9 @@
+/*Équipe de: Jonathan Savard et Samuel Velasco
+ *Groupe: 01
+ *Projet: Rummy
+ */
 package com.moumene.rummy;
-//commentaire
+
 import java.util.Random;
 import java.util.Scanner;
 
